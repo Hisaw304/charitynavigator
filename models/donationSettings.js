@@ -1,3 +1,4 @@
+// models
 import mongoose from "mongoose";
 
 const donationSettingsSchema = new mongoose.Schema(

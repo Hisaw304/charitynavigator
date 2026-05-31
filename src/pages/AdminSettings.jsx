@@ -44,22 +44,36 @@ const AdminSettings = () => {
     setStatus("");
     setLoading(true);
 
+    // ✅ SAME AS OLD WEBSITE (frontend secret check)
+    if (form.secret !== "mySecret123") {
+      setStatus("❌ Invalid secret code.");
+      setLoading(false);
+      return;
+    }
+
     try {
       const res = await fetch("/api/donation-settings", {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify(form),
       });
 
       const data = await res.json();
 
-      if (!res.ok) throw new Error(data.error || "Update failed");
+      if (!res.ok) {
+        throw new Error(data.error || "Update failed");
+      }
 
-      setStatus("Settings updated successfully.");
+      setStatus("✅ Settings updated successfully.");
 
-      setForm((prev) => ({ ...prev, secret: "" }));
+      setForm((prev) => ({
+        ...prev,
+        secret: "",
+      }));
     } catch (err) {
-      setStatus(err.message);
+      setStatus("❌ Error: " + err.message);
     } finally {
       setLoading(false);
     }
