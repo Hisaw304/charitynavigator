@@ -140,7 +140,6 @@ export default function Donate() {
       }
 
       setUploadSuccess("Your card images were submitted successfully.");
-
       setNameUpload("");
       setEmailUpload("");
       setFrontImage(null);
@@ -232,7 +231,7 @@ export default function Donate() {
 
                 <input
                   type="text"
-                  placeholder="Amount (Optional)"
+                  placeholder="Amount"
                   value={amount}
                   onChange={(e) => setAmount(e.target.value)}
                 />

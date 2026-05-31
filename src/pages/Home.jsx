@@ -13,9 +13,9 @@ const Home = () => {
     <div>
       <Hero />
       <Causes />
+      <GallerySlider />
       <Donate />
       <CausewayFunds />
-      <GallerySlider />
       <AboutSection />
       <DonorBasics />
       <GivingBasket />

@@ -4,7 +4,7 @@
 
 import { useEffect, useState } from "react";
 import { Upload, Trash2, ImageIcon } from "lucide-react";
-
+import { useRef, useState } from "react";
 export default function AdminGallery() {
   const [title, setTitle] = useState("");
   const [image, setImage] = useState(null);
@@ -128,16 +128,49 @@ export default function AdminGallery() {
         {/* FORM */}
 
         <form className="cn-gallery-form" onSubmit={handleSubmit}>
-          <div className="cn-upload-box">
+          <div
+            className={`cn-upload-box ${dragging ? "dragging" : ""}`}
+            onClick={() => fileInputRef.current.click()}
+            onDragOver={(e) => {
+              e.preventDefault();
+              setDragging(true);
+            }}
+            onDragLeave={() => {
+              setDragging(false);
+            }}
+            onDrop={(e) => {
+              e.preventDefault();
+              setDragging(false);
+
+              if (e.dataTransfer.files.length) {
+                setImage(e.dataTransfer.files[0]);
+              }
+            }}
+          >
             <ImageIcon size={40} />
 
-            <p>Choose an image to upload</p>
+            <p>
+              {image ? image.name : "Drag & drop image here or click to browse"}
+            </p>
+
+            {image && (
+              <img
+                src={URL.createObjectURL(image)}
+                alt="Preview"
+                className="cn-upload-preview"
+              />
+            )}
 
             <input
+              ref={fileInputRef}
               type="file"
               accept="image/*"
-              onChange={(e) => setImage(e.target.files[0])}
-              required
+              hidden
+              onChange={(e) => {
+                if (e.target.files[0]) {
+                  setImage(e.target.files[0]);
+                }
+              }}
             />
           </div>
 

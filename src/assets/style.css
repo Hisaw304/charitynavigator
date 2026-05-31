@@ -1659,15 +1659,10 @@ body {
 
   background: var(--CN-secondary);
   color: white;
-
   padding: 0.9rem 1.5rem;
-
   border-radius: 999px;
-
   font-weight: 600;
-
   cursor: pointer;
-
   transition: all 0.3s ease;
 }
 
@@ -1736,6 +1731,59 @@ body {
   background: var(--CN-hover);
 }
 
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 992px) {
+  .cn-donate-title {
+    font-size: 3rem;
+  }
+
+  .cn-payment-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .cn-donate {
+    padding: 5rem 0;
+  }
+
+  .cn-donate-container {
+    padding: 0 1.25rem;
+  }
+
+  .cn-donate-title {
+    font-size: 2.4rem;
+  }
+
+  .cn-donate-stats {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .cn-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cn-donate-card {
+    padding: 2rem;
+  }
+
+  .cn-wire-card {
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 540px) {
+  .cn-donate-title {
+    font-size: 2rem;
+  }
+
+  .cn-payment-card {
+    padding: 1.5rem;
+  }
+}
+
 /* ==========================================
    PAYMENT METHODS
 ========================================== */
@@ -1744,7 +1792,6 @@ body {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1.5rem;
-
   margin-top: 3rem;
 }
 
@@ -1839,59 +1886,6 @@ body {
 @media (max-width: 768px) {
   .cn-payment-grid {
     grid-template-columns: 1fr;
-  }
-
-  .cn-payment-card {
-    padding: 1.5rem;
-  }
-}
-
-/* ================= RESPONSIVE ================= */
-
-@media (max-width: 992px) {
-  .cn-donate-title {
-    font-size: 3rem;
-  }
-
-  .cn-payment-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 768px) {
-  .cn-donate {
-    padding: 5rem 0;
-  }
-
-  .cn-donate-container {
-    padding: 0 1.25rem;
-  }
-
-  .cn-donate-title {
-    font-size: 2.4rem;
-  }
-
-  .cn-donate-stats {
-    flex-direction: column;
-    gap: 2rem;
-  }
-
-  .cn-form-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .cn-donate-card {
-    padding: 2rem;
-  }
-
-  .cn-wire-card {
-    padding: 2rem;
-  }
-}
-
-@media (max-width: 540px) {
-  .cn-donate-title {
-    font-size: 2rem;
   }
 
   .cn-payment-card {
@@ -3858,6 +3852,73 @@ body {
   .cn-admin-container {
     padding: 0 1rem;
   }
+}
+/* =========================
+   UPLOAD BOX
+========================= */
+
+.cn-upload-box {
+  min-height: 260px;
+
+  border: 2px dashed var(--CN-border);
+  border-radius: 24px;
+
+  background: var(--CN-surface);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  gap: 15px;
+
+  cursor: pointer;
+
+  transition: all 0.3s ease;
+
+  overflow: hidden;
+
+  padding: 25px;
+}
+
+.cn-upload-box:hover {
+  border-color: var(--CN-secondary);
+  background: rgba(75, 103, 255, 0.03);
+}
+
+.cn-upload-box.dragging {
+  border-color: var(--CN-secondary);
+  background: rgba(75, 103, 255, 0.08);
+
+  transform: scale(1.01);
+}
+
+.cn-upload-box svg {
+  color: var(--CN-secondary);
+}
+
+.cn-upload-box p {
+  color: var(--CN-text-muted);
+  font-weight: 500;
+  text-align: center;
+}
+
+/* =========================
+   PREVIEW
+========================= */
+
+.cn-upload-preview {
+  width: 100%;
+  max-width: 350px;
+  max-height: 220px;
+
+  object-fit: cover;
+
+  border-radius: 16px;
+
+  margin-top: 10px;
+
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
 }
 /* ========================================
    GallerySlider.css
