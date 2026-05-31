@@ -26,7 +26,7 @@ import {
 
 import { SiCashapp, SiZelle } from "react-icons/si";
 
-const RECAPTCHA_SITE_KEY = "6LcIkZcrAAAAAGd48qGev8KTKtc_4Mt_oHab2wmW";
+const RECAPTCHA_SITE_KEY = "6LeoOQUtAAAAAOVKlZ3ezYQBlbvk96u4zTio5mK5";
 
 export default function Donate() {
   const navigate = useNavigate();
