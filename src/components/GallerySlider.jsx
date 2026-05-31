@@ -10,7 +10,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-import "./GallerySlider.css";
+// import "./GallerySlider.css";
 
 export default function GallerySlider() {
   const [images, setImages] = useState([]);
