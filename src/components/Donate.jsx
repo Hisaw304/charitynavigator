@@ -5,7 +5,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import ReCAPTCHA from "react-google-recaptcha";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 import {
   FaPaypal,
@@ -358,44 +358,48 @@ export default function Donate() {
               </button>
             </form>
           </motion.div>
+          <div className="cn-payment-card">
+            <FaBitcoin />
+            <h4>Crypto</h4>
+            <p>Support through cryptocurrency.</p>
 
-          {/* ================= PAYMENT METHODS ================= */}
-
-          <div className="cn-payment-grid">
-            <div className="cn-payment-card">
-              <FaBitcoin />
-              <h4>Crypto</h4>
-              <p>Support through cryptocurrency.</p>
+            <Link to="/donate">
               <button>Donate with Crypto</button>
-            </div>
-
-            <div className="cn-payment-card">
-              <FaPaypal />
-              <h4>PayPal</h4>
-              <p>Fast and secure online giving.</p>
-              <button>Donate with PayPal</button>
-            </div>
-
-            <div className="cn-payment-card">
-              <SiCashapp />
-              <h4>Cash App</h4>
-              <p>Send support instantly.</p>
-              <button>Donate with Cash App</button>
-            </div>
-
-            <div className="cn-payment-card">
-              <SiZelle />
-              <h4>Zelle</h4>
-              <p>Quick direct transfers.</p>
-              <button>Donate with Zelle</button>
-            </div>
+            </Link>
           </div>
 
-          {/* ================= WIRE ================= */}
+          <div className="cn-payment-card">
+            <FaPaypal />
+            <h4>PayPal</h4>
+            <p>Fast and secure online giving.</p>
+
+            <Link to="/donate">
+              <button>Donate with PayPal</button>
+            </Link>
+          </div>
+
+          <div className="cn-payment-card">
+            <SiCashapp />
+            <h4>Cash App</h4>
+            <p>Send support instantly.</p>
+
+            <Link to="/donate">
+              <button>Donate with Cash App</button>
+            </Link>
+          </div>
+
+          <div className="cn-payment-card">
+            <SiZelle />
+            <h4>Zelle</h4>
+            <p>Quick direct transfers.</p>
+
+            <Link to="/donate">
+              <button>Donate with Zelle</button>
+            </Link>
+          </div>
 
           <div className="cn-wire-card">
             <FaUniversity />
-
             <h3>Wire Transfer</h3>
 
             <p>
@@ -403,7 +407,9 @@ export default function Donate() {
               additional information.
             </p>
 
-            <button>Request Instructions</button>
+            <Link to="/donate">
+              <button>Request Instructions</button>
+            </Link>
           </div>
         </div>
       </div>

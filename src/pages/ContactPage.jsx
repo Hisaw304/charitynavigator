@@ -7,6 +7,8 @@ import heroImage from "../assets/careers.jpg";
 import { useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
+import Faq from "../components/Faq";
+import NonprofitsFaq from "../components/NonprofitsFaq";
 
 const position = [42.0597, -93.8802]; // Boone, IA
 
@@ -195,6 +197,8 @@ const ContactPage = () => {
           </motion.div>
         </div>
       </section>
+      <Faq />
+      <NonprofitsFaq />
     </>
   );
 };
