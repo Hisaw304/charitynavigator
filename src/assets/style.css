@@ -718,8 +718,8 @@ body {
   width: 160px;
   height: 220px;
 
-  top: -60px;
-  left: -70px;
+  top: -80px;
+  left: -50px;
 
   transform: rotate(-8deg);
 }
@@ -730,7 +730,7 @@ body {
   width: 170px;
   height: 230px;
 
-  bottom: -90px;
+  bottom: -100px;
   right: 15px;
 
   transform: rotate(7deg);
@@ -743,7 +743,7 @@ body {
   height: 250px;
 
   top: -60px;
-  right: -50px;
+  left: -20px;
 
   transform: rotate(8deg);
 }
@@ -839,16 +839,16 @@ body {
 
   .cn-floating-image-one {
     left: -20px;
-    top: -40px;
+    top: -90px;
   }
 
   .cn-floating-image-three {
-    right: -20px;
+    left: -20px;
     top: -40px;
   }
 
   .cn-floating-image-two {
-    bottom: -50px;
+    bottom: -80px;
   }
 }
 /* ========================================
