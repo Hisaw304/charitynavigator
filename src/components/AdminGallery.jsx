@@ -8,11 +8,9 @@ import { useRef } from "react";
 export default function AdminGallery() {
   const [title, setTitle] = useState("");
   const [image, setImage] = useState(null);
-
+  const [dragging, setDragging] = useState(false);
   const [galleryImages, setGalleryImages] = useState([]);
-
   const [loading, setLoading] = useState(false);
-
   const [status, setStatus] = useState("");
 
   // ===============================
