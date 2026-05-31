@@ -22,6 +22,7 @@ import {
   FaUpload,
   FaHandHoldingHeart,
   FaRegCreditCard,
+  FaCopy,
 } from "react-icons/fa";
 
 import { SiCashapp, SiZelle } from "react-icons/si";
