@@ -3920,9 +3920,9 @@ body {
 
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
 }
-/* ========================================
+/* ==========================================
    SECTION
-======================================== */
+========================================== */
 
 .cn-gallery-slider {
   padding: 100px 20px;
@@ -3931,18 +3931,19 @@ body {
 }
 
 .cn-gallery-container {
+  width: 100%;
   max-width: 1400px;
   margin: 0 auto;
 }
 
-/* ========================================
+/* ==========================================
    HEADER
-======================================== */
+========================================== */
 
 .cn-gallery-header {
+  text-align: center;
   max-width: 800px;
   margin: 0 auto 60px;
-  text-align: center;
 }
 
 .cn-gallery-subtitle {
@@ -3957,15 +3958,16 @@ body {
   background: rgba(75, 103, 255, 0.1);
   color: var(--CN-secondary);
 
-  font-size: 0.9rem;
   font-weight: 600;
+  font-size: 0.9rem;
 
   margin-bottom: 18px;
 }
 
 .cn-gallery-title {
-  font-size: clamp(2.3rem, 5vw, 4.2rem);
+  font-size: clamp(2.5rem, 5vw, 4.2rem);
   font-weight: 700;
+
   line-height: 1.15;
 
   color: var(--CN-primary);
@@ -3978,18 +3980,14 @@ body {
 
   margin: 0 auto 35px;
 
-  font-size: 1.05rem;
   line-height: 1.8;
 
   color: var(--CN-text-muted);
 }
 
-/* ========================================
-   BUTTON
-======================================== */
-
 .cn-gallery-btn {
   display: inline-flex;
+
   align-items: center;
   justify-content: center;
 
@@ -3997,62 +3995,78 @@ body {
 
   border-radius: 999px;
 
-  background: var(--CN-primary);
-  color: #fff;
-
   text-decoration: none;
+
+  color: #fff;
+  background: var(--CN-primary);
+
   font-weight: 600;
 
-  transition: all 0.3s ease;
+  transition: 0.3s ease;
 }
 
 .cn-gallery-btn:hover {
   background: var(--CN-hover);
 
   transform: translateY(-3px);
-
-  box-shadow: 0 15px 35px rgba(7, 42, 87, 0.18);
 }
 
-/* ========================================
-   SWIPER SECTION
-======================================== */
+/* ==========================================
+   SWIPER WRAPPER
+========================================== */
 
-.cn-slider-section {
+.cn-slider-wrapper {
   position: relative;
+  width: 100%;
 }
 
 .cn-gallery-swiper {
-  overflow: visible !important;
-  padding: 10px 4px 70px;
+  width: 100%;
+  padding-bottom: 70px;
 }
 
-/* ========================================
-   SLIDE
-======================================== */
+/* ==========================================
+   IMPORTANT SWIPER FIXES
+========================================== */
+
+.swiper {
+  width: 100%;
+  overflow: hidden;
+  background: transparent !important;
+}
+
+.swiper-wrapper {
+  align-items: stretch;
+  background: transparent !important;
+}
 
 .swiper-slide {
   height: auto;
+  background: transparent !important;
 }
+
+/* ==========================================
+   CARD
+========================================== */
 
 .cn-gallery-card {
   position: relative;
 
-  height: 550px;
+  height: 520px;
 
   overflow: hidden;
 
-  border-radius: 28px;
+  border-radius: 24px;
 
-  background: #f5f5f5;
+  background: #eaeaea;
 
-  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.08);
+  box-shadow: 0 15px 40px rgba(15, 23, 42, 0.08);
 
-  transform: translateZ(0);
+  transform: translate3d(0, 0, 0);
 
   backface-visibility: hidden;
 
-  will-change: transform;
+  -webkit-backface-visibility: hidden;
 }
 
 .cn-gallery-card img {
@@ -4063,53 +4077,58 @@ body {
 
   object-fit: cover;
 
-  transform: translateZ(0);
+  transform: translate3d(0, 0, 0);
 
   backface-visibility: hidden;
+
+  -webkit-backface-visibility: hidden;
+
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
-/* ========================================
-   CONTENT OVERLAY
-======================================== */
+/* ==========================================
+   OVERLAY
+========================================== */
 
 .cn-slide-content {
   position: absolute;
 
-  left: 20px;
-  right: 20px;
-  bottom: 20px;
+  left: 18px;
+  right: 18px;
+  bottom: 18px;
 
-  padding: 20px;
+  padding: 18px;
 
-  border-radius: 20px;
+  border-radius: 18px;
 
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.92);
 
   backdrop-filter: blur(12px);
-
-  border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
 .cn-slide-content h3 {
-  font-size: 1.15rem;
-  font-weight: 700;
+  margin: 0;
 
   color: var(--CN-primary);
 
-  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
 }
 
-/* ========================================
+/* ==========================================
    ARROWS
-======================================== */
+========================================== */
 
 .cn-slider-arrow {
   position: absolute;
 
-  top: 45%;
+  top: 50%;
 
-  width: 58px;
-  height: 58px;
+  transform: translateY(-50%);
+
+  width: 55px;
+  height: 55px;
 
   border: none;
 
@@ -4127,16 +4146,14 @@ body {
 
   z-index: 20;
 
-  transition: all 0.3s ease;
-
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+
+  transition: 0.3s ease;
 }
 
 .cn-slider-arrow:hover {
   background: var(--CN-primary);
   color: white;
-
-  transform: scale(1.08);
 }
 
 .cn-prev {
@@ -4147,9 +4164,9 @@ body {
   right: -20px;
 }
 
-/* ========================================
+/* ==========================================
    PAGINATION
-======================================== */
+========================================== */
 
 .swiper-pagination {
   bottom: 0 !important;
@@ -4161,51 +4178,32 @@ body {
 
   opacity: 1;
 
-  background: var(--CN-border);
+  background: #d1d5db;
 
   transition: all 0.3s ease;
 }
 
 .swiper-pagination-bullet-active {
-  width: 34px;
+  width: 36px;
 
   border-radius: 999px;
 
   background: var(--CN-secondary);
 }
 
-/* ========================================
-   REMOVE WHITE FLASH
-======================================== */
-
-.swiper,
-.swiper-wrapper,
-.swiper-slide {
-  background: transparent !important;
-}
-
-.swiper-wrapper {
-  transition-timing-function: ease !important;
-}
-
-.swiper-slide img {
-  user-select: none;
-  -webkit-user-drag: none;
-}
-
-/* ========================================
+/* ==========================================
    TABLET
-======================================== */
+========================================== */
 
 @media (max-width: 1199px) {
   .cn-gallery-card {
-    height: 500px;
+    height: 460px;
   }
 }
 
-/* ========================================
+/* ==========================================
    MOBILE
-======================================== */
+========================================== */
 
 @media (max-width: 768px) {
   .cn-gallery-slider {
@@ -4213,37 +4211,21 @@ body {
   }
 
   .cn-gallery-title {
-    font-size: 2.4rem;
-  }
-
-  .cn-gallery-text {
-    font-size: 0.98rem;
+    font-size: 2.3rem;
   }
 
   .cn-gallery-card {
-    height: 420px;
+    height: 380px;
   }
 
   .cn-slider-arrow {
     display: none;
   }
-
-  .cn-slide-content {
-    left: 15px;
-    right: 15px;
-    bottom: 15px;
-
-    padding: 16px;
-  }
-
-  .cn-slide-content h3 {
-    font-size: 1rem;
-  }
 }
 
-/* ========================================
+/* ==========================================
    SMALL MOBILE
-======================================== */
+========================================== */
 
 @media (max-width: 480px) {
   .cn-gallery-title {
@@ -4255,6 +4237,6 @@ body {
   }
 
   .cn-gallery-card {
-    height: 320px;
+    height: 300px;
   }
 }

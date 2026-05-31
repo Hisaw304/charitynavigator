@@ -10,10 +10,9 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-// import "./GallerySlider.css";
-
 export default function GallerySlider() {
   const [images, setImages] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchImages = async () => {
@@ -21,28 +20,39 @@ export default function GallerySlider() {
         const res = await fetch("/api/gallery-images");
         const data = await res.json();
 
+        await Promise.all(
+          data.map((item) => {
+            return new Promise((resolve) => {
+              const img = new Image();
+              img.src = item.imageUrl;
+              img.onload = resolve;
+              img.onerror = resolve;
+            });
+          })
+        );
+
         setImages(data);
-      } catch (error) {
-        console.error(error);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchImages();
   }, []);
 
-  if (!images.length) return null;
+  if (loading || !images.length) return null;
 
   return (
     <section className="cn-gallery-slider">
       <div className="cn-gallery-container">
-        {/* HEADER */}
-
         <motion.div
           className="cn-gallery-header"
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
           viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
         >
           <span className="cn-gallery-subtitle">
             Real Impact, Real Communities
@@ -55,8 +65,6 @@ export default function GallerySlider() {
           <p className="cn-gallery-text">
             Every contribution helps nonprofits deliver life-changing services,
             strengthen communities, and create opportunities for people in need.
-            Together, we can build a brighter future through informed and
-            impactful giving.
           </p>
 
           <a href="#donate" className="cn-gallery-btn">
@@ -64,25 +72,27 @@ export default function GallerySlider() {
           </a>
         </motion.div>
 
-        {/* SLIDER */}
-
-        <div className="cn-slider-section">
+        <div className="cn-slider-wrapper">
           <button className="cn-slider-arrow cn-prev">
-            <ChevronLeft size={26} />
+            <ChevronLeft size={24} />
           </button>
 
           <button className="cn-slider-arrow cn-next">
-            <ChevronRight size={26} />
+            <ChevronRight size={24} />
           </button>
 
           <Swiper
             modules={[Navigation, Pagination, Autoplay]}
-            loop={true}
-            speed={800}
+            slidesPerView={1}
+            spaceBetween={24}
+            speed={700}
+            loop={images.length > 3}
+            centeredSlides={false}
             preloadImages={true}
             watchSlidesProgress={true}
             observer={true}
             observeParents={true}
+            updateOnImagesReady={true}
             autoplay={{
               delay: 5000,
               disableOnInteraction: false,
@@ -95,7 +105,6 @@ export default function GallerySlider() {
             pagination={{
               clickable: true,
             }}
-            spaceBetween={24}
             breakpoints={{
               0: {
                 slidesPerView: 1,
@@ -114,8 +123,8 @@ export default function GallerySlider() {
                 <div className="cn-gallery-card">
                   <img
                     src={item.imageUrl}
-                    alt={item.title || "Gallery"}
-                    loading="lazy"
+                    alt={item.title || "Gallery image"}
+                    draggable="false"
                   />
 
                   {item.title && (
