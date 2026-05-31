@@ -1,5 +1,4 @@
 import formidable from "formidable";
-import fs from "fs";
 
 import { connectDB } from "./db.js";
 import cloudinary from "./cloudinary.js";

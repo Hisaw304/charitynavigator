@@ -9,8 +9,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 export default function GallerySlider() {
   const [images, setImages] = useState([]);
   const [current, setCurrent] = useState(0);
-  const [touchStart, setTouchStart] = useState(null);
-  const [touchEnd, setTouchEnd] = useState(null);
+  const [direction, setDirection] = useState(0);
 
   // ========================
   // FETCH IMAGES
@@ -36,7 +35,7 @@ export default function GallerySlider() {
   // ========================
 
   useEffect(() => {
-    if (images.length === 0) return;
+    if (!images.length) return;
 
     const interval = setInterval(() => {
       nextSlide();
@@ -50,91 +49,127 @@ export default function GallerySlider() {
   // ========================
 
   const nextSlide = () => {
+    setDirection(1);
+
     setCurrent((prev) => (prev === images.length - 1 ? 0 : prev + 1));
   };
 
   const prevSlide = () => {
+    setDirection(-1);
+
     setCurrent((prev) => (prev === 0 ? images.length - 1 : prev - 1));
   };
 
   // ========================
-  // SWIPE SUPPORT
+  // DRAG / SWIPE
   // ========================
 
-  const minSwipeDistance = 50;
+  const handleDragEnd = (event, info) => {
+    if (info.offset.x < -100) {
+      nextSlide();
+    }
 
-  const onTouchStart = (e) => {
-    setTouchEnd(null);
-    setTouchStart(e.targetTouches[0].clientX);
-  };
-
-  const onTouchMove = (e) => {
-    setTouchEnd(e.targetTouches[0].clientX);
-  };
-
-  const onTouchEnd = () => {
-    if (!touchStart || !touchEnd) return;
-
-    const distance = touchStart - touchEnd;
-
-    const isLeftSwipe = distance > minSwipeDistance;
-    const isRightSwipe = distance < -minSwipeDistance;
-
-    if (isLeftSwipe) nextSlide();
-
-    if (isRightSwipe) prevSlide();
+    if (info.offset.x > 100) {
+      prevSlide();
+    }
   };
 
   if (!images.length) return null;
 
   return (
     <section className="cn-gallery-slider">
-      <div
-        className="cn-slider-wrapper"
-        onTouchStart={onTouchStart}
-        onTouchMove={onTouchMove}
-        onTouchEnd={onTouchEnd}
-      >
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={images[current]._id}
-            className="cn-slide"
-            initial={{ opacity: 0, scale: 1.05 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <img src={images[current].imageUrl} alt={images[current].title} />
+      <div className="cn-gallery-container">
+        {/* ================= HEADING ================= */}
 
-            {images[current].title && (
-              <div className="cn-slide-content">
-                <h3>{images[current].title}</h3>
-              </div>
-            )}
-          </motion.div>
-        </AnimatePresence>
+        <motion.div
+          className="cn-gallery-header"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          viewport={{ once: true }}
+        >
+          <span className="cn-gallery-subtitle">
+            Real Impact, Real Communities
+          </span>
 
-        {/* Arrows */}
+          <h2 className="cn-gallery-title">
+            See How Your Support Creates Change
+          </h2>
 
-        <button className="cn-slider-arrow cn-left" onClick={prevSlide}>
-          <ChevronLeft size={28} />
-        </button>
+          <p className="cn-gallery-text">
+            Every contribution helps nonprofits deliver life-changing services,
+            strengthen communities, and create opportunities for people in need.
+            Together, we can build a brighter future through informed and
+            impactful giving.
+          </p>
 
-        <button className="cn-slider-arrow cn-right" onClick={nextSlide}>
-          <ChevronRight size={28} />
-        </button>
-      </div>
+          <a href="#donate" className="cn-gallery-btn">
+            Donate Now
+          </a>
+        </motion.div>
 
-      {/* Dots */}
+        {/* ================= SLIDER ================= */}
 
-      <div className="cn-slider-dots">
-        {images.map((_, index) => (
-          <button
-            key={index}
-            className={`cn-dot ${current === index ? "active" : ""}`}
-            onClick={() => setCurrent(index)}
-          />
-        ))}
+        <div className="cn-slider-wrapper">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={images[current]._id}
+              className="cn-slide"
+              drag="x"
+              dragConstraints={{ left: 0, right: 0 }}
+              onDragEnd={handleDragEnd}
+              initial={{
+                x: direction > 0 ? 400 : -400,
+                opacity: 0,
+              }}
+              animate={{
+                x: 0,
+                opacity: 1,
+              }}
+              exit={{
+                x: direction > 0 ? -400 : 400,
+                opacity: 0,
+              }}
+              transition={{
+                duration: 0.5,
+                ease: "easeInOut",
+              }}
+            >
+              <img src={images[current].imageUrl} alt={images[current].title} />
+
+              {images[current].title && (
+                <div className="cn-slide-content">
+                  <h3>{images[current].title}</h3>
+                </div>
+              )}
+            </motion.div>
+          </AnimatePresence>
+
+          {/* ARROWS */}
+
+          <button className="cn-slider-arrow cn-left" onClick={prevSlide}>
+            <ChevronLeft size={28} />
+          </button>
+
+          <button className="cn-slider-arrow cn-right" onClick={nextSlide}>
+            <ChevronRight size={28} />
+          </button>
+        </div>
+
+        {/* DOTS */}
+
+        <div className="cn-slider-dots">
+          {images.map((_, index) => (
+            <button
+              key={index}
+              className={`cn-dot ${current === index ? "active" : ""}`}
+              onClick={() => {
+                setDirection(index > current ? 1 : -1);
+                setCurrent(index);
+              }}
+            />
+          ))}
+        </div>
       </div>
     </section>
   );

@@ -3860,79 +3860,170 @@ body {
   }
 }
 /* ========================================
-   Gallery Slider
+   GallerySlider.css
 ======================================== */
 
 .cn-gallery-slider {
-  width: 100%;
-  padding: 5rem 0;
+  padding: 100px 20px;
+  background: var(--pw-body);
+  overflow: hidden;
 }
+
+.cn-gallery-container {
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+/* ==========================
+   HEADER
+========================== */
+
+.cn-gallery-header {
+  max-width: 760px;
+  margin: 0 auto 60px;
+  text-align: center;
+}
+
+.cn-gallery-subtitle {
+  display: inline-block;
+  padding: 8px 18px;
+  border-radius: 999px;
+  background: rgba(184, 107, 75, 0.12);
+  color: var(--pw-accent);
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 18px;
+}
+
+.cn-gallery-title {
+  font-size: clamp(2rem, 5vw, 3.8rem);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--pw-primary);
+  margin-bottom: 20px;
+}
+
+.cn-gallery-text {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--pw-text-muted);
+  max-width: 700px;
+  margin: 0 auto 35px;
+}
+
+/* ==========================
+   BUTTON
+========================== */
+
+.cn-gallery-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+
+  padding: 15px 34px;
+  border-radius: 999px;
+
+  background: var(--pw-primary);
+  color: white;
+
+  font-weight: 600;
+  font-size: 0.95rem;
+
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.cn-gallery-btn:hover {
+  background: var(--pw-hover);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(50, 27, 21, 0.18);
+}
+
+/* ==========================
+   SLIDER
+========================== */
 
 .cn-slider-wrapper {
   position: relative;
-  max-width: 1300px;
-  margin: auto;
-  overflow: hidden;
+  width: 100%;
+  height: 650px;
   border-radius: 32px;
+  overflow: hidden;
 }
 
 .cn-slide {
-  position: relative;
-  height: 650px;
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+}
+
+.cn-slide:active {
+  cursor: grabbing;
 }
 
 .cn-slide img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
 }
+
+/* ==========================
+   SLIDE CONTENT
+========================== */
 
 .cn-slide-content {
   position: absolute;
-  left: 50px;
-  bottom: 50px;
+  left: 40px;
+  bottom: 40px;
 
-  background: rgba(0, 0, 0, 0.45);
-  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
 
-  padding: 1.25rem 2rem;
-
+  padding: 20px 28px;
   border-radius: 20px;
 
-  color: white;
+  max-width: 450px;
 }
 
 .cn-slide-content h3 {
-  font-size: 2rem;
-  margin: 0;
+  font-size: 1.3rem;
+  color: var(--pw-primary);
+  font-weight: 700;
 }
+
+/* ==========================
+   ARROWS
+========================== */
 
 .cn-slider-arrow {
   position: absolute;
   top: 50%;
-
   transform: translateY(-50%);
 
-  width: 55px;
-  height: 55px;
+  width: 56px;
+  height: 56px;
 
   border: none;
-
   border-radius: 50%;
 
-  background: white;
-
-  cursor: pointer;
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--pw-primary);
 
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 
-  transition: 0.3s;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  z-index: 10;
 }
 
 .cn-slider-arrow:hover {
-  transform: translateY(-50%) scale(1.05);
+  background: white;
+  transform: translateY(-50%) scale(1.08);
 }
 
 .cn-left {
@@ -3943,37 +4034,42 @@ body {
   right: 25px;
 }
 
+/* ==========================
+   DOTS
+========================== */
+
 .cn-slider-dots {
   display: flex;
   justify-content: center;
-  gap: 10px;
-
-  margin-top: 1.5rem;
+  gap: 12px;
+  margin-top: 30px;
 }
 
 .cn-dot {
   width: 12px;
   height: 12px;
 
+  border: none;
   border-radius: 50%;
 
-  border: none;
-
+  background: var(--pw-border);
   cursor: pointer;
 
-  background: var(--CN-border);
-
-  transition: 0.3s;
+  transition: all 0.3s ease;
 }
 
 .cn-dot.active {
-  background: var(--CN-primary);
-
-  transform: scale(1.3);
+  width: 36px;
+  border-radius: 999px;
+  background: var(--pw-accent);
 }
 
-@media (max-width: 992px) {
-  .cn-slide {
+/* ==========================
+   RESPONSIVE
+========================== */
+
+@media (max-width: 991px) {
+  .cn-slider-wrapper {
     height: 500px;
   }
 
@@ -3981,20 +4077,30 @@ body {
     left: 20px;
     right: 20px;
     bottom: 20px;
-  }
-
-  .cn-slide-content h3 {
-    font-size: 1.5rem;
+    max-width: unset;
   }
 }
 
 @media (max-width: 768px) {
-  .cn-slide {
-    height: 350px;
+  .cn-gallery-slider {
+    padding: 80px 16px;
+  }
+
+  .cn-slider-wrapper {
+    height: 380px;
+    border-radius: 24px;
+  }
+
+  .cn-gallery-title {
+    font-size: 2.3rem;
+  }
+
+  .cn-gallery-text {
+    font-size: 0.98rem;
   }
 
   .cn-slider-arrow {
-    width: 45px;
-    height: 45px;
+    width: 46px;
+    height: 46px;
   }
 }
