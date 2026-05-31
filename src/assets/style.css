@@ -3920,9 +3920,9 @@ body {
 
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
 }
-/* ==========================================
-   SECTION
-========================================== */
+/* ========================================
+   GallerySlider.css
+======================================== */
 
 .cn-gallery-slider {
   padding: 100px 20px;
@@ -3931,19 +3931,18 @@ body {
 }
 
 .cn-gallery-container {
-  width: 100%;
-  max-width: 1400px;
+  max-width: 1300px;
   margin: 0 auto;
 }
 
-/* ==========================================
+/* ========================================
    HEADER
-========================================== */
+======================================== */
 
 .cn-gallery-header {
-  text-align: center;
   max-width: 800px;
   margin: 0 auto 60px;
+  text-align: center;
 }
 
 .cn-gallery-subtitle {
@@ -3958,16 +3957,15 @@ body {
   background: rgba(75, 103, 255, 0.1);
   color: var(--CN-secondary);
 
-  font-weight: 600;
   font-size: 0.9rem;
+  font-weight: 600;
 
   margin-bottom: 18px;
 }
 
 .cn-gallery-title {
-  font-size: clamp(2.5rem, 5vw, 4.2rem);
+  font-size: clamp(2.3rem, 5vw, 4.2rem);
   font-weight: 700;
-
   line-height: 1.15;
 
   color: var(--CN-primary);
@@ -3980,14 +3978,18 @@ body {
 
   margin: 0 auto 35px;
 
+  font-size: 1.05rem;
   line-height: 1.8;
 
   color: var(--CN-text-muted);
 }
 
+/* ========================================
+   CTA BUTTON
+======================================== */
+
 .cn-gallery-btn {
   display: inline-flex;
-
   align-items: center;
   justify-content: center;
 
@@ -3995,130 +3997,105 @@ body {
 
   border-radius: 999px;
 
-  text-decoration: none;
-
-  color: #fff;
   background: var(--CN-primary);
+  color: white;
 
+  text-decoration: none;
   font-weight: 600;
+  font-size: 0.95rem;
 
-  transition: 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .cn-gallery-btn:hover {
   background: var(--CN-hover);
 
   transform: translateY(-3px);
+
+  box-shadow: 0 15px 35px rgba(7, 42, 87, 0.18);
 }
 
-/* ==========================================
-   SWIPER WRAPPER
-========================================== */
+/* ========================================
+   SLIDER WRAPPER
+======================================== */
 
 .cn-slider-wrapper {
   position: relative;
-  width: 100%;
-}
 
-.cn-gallery-swiper {
   width: 100%;
-  padding-bottom: 70px;
-}
+  height: 650px;
 
-/* ==========================================
-   IMPORTANT SWIPER FIXES
-========================================== */
-
-.swiper {
-  width: 100%;
   overflow: hidden;
-  background: transparent !important;
+
+  border-radius: 30px;
+
+  background: var(--CN-surface);
+
+  box-shadow: 0 20px 60px rgba(15, 23, 42, 0.08);
 }
 
-.swiper-wrapper {
-  align-items: stretch;
-  background: transparent !important;
-}
+/* ========================================
+   SLIDE
+======================================== */
 
-.swiper-slide {
-  height: auto;
-  background: transparent !important;
-}
-
-/* ==========================================
-   CARD
-========================================== */
-
-.cn-gallery-card {
+.cn-slide {
   position: relative;
 
-  height: 520px;
-
-  overflow: hidden;
-
-  border-radius: 24px;
-
-  background: #eaeaea;
-
-  box-shadow: 0 15px 40px rgba(15, 23, 42, 0.08);
-
-  transform: translate3d(0, 0, 0);
-
-  backface-visibility: hidden;
-
-  -webkit-backface-visibility: hidden;
-}
-
-.cn-gallery-card img {
   width: 100%;
   height: 100%;
 
-  display: block;
-
-  object-fit: cover;
-
-  transform: translate3d(0, 0, 0);
-
-  backface-visibility: hidden;
-
-  -webkit-backface-visibility: hidden;
-
-  user-select: none;
-  -webkit-user-drag: none;
+  cursor: grab;
 }
 
-/* ==========================================
-   OVERLAY
-========================================== */
+.cn-slide:active {
+  cursor: grabbing;
+}
+
+.cn-slide img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  display: block;
+}
+
+/* ========================================
+   IMAGE OVERLAY CARD
+======================================== */
 
 .cn-slide-content {
   position: absolute;
 
-  left: 18px;
-  right: 18px;
-  bottom: 18px;
+  left: 35px;
+  bottom: 35px;
 
-  padding: 18px;
+  max-width: 450px;
 
-  border-radius: 18px;
+  padding: 22px 28px;
 
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(255, 255, 255, 0.96);
 
   backdrop-filter: blur(12px);
+
+  border: 1px solid var(--CN-border);
+
+  border-radius: 22px;
+
+  box-shadow: 0 15px 40px rgba(15, 23, 42, 0.1);
 }
 
 .cn-slide-content h3 {
-  margin: 0;
-
   color: var(--CN-primary);
 
-  font-size: 1.1rem;
+  font-size: 1.35rem;
   font-weight: 700;
+
+  line-height: 1.4;
 }
 
-/* ==========================================
+/* ========================================
    ARROWS
-========================================== */
+======================================== */
 
 .cn-slider-arrow {
   position: absolute;
@@ -4127,12 +4104,11 @@ body {
 
   transform: translateY(-50%);
 
-  width: 55px;
-  height: 55px;
-
-  border: none;
+  width: 56px;
+  height: 56px;
 
   border-radius: 50%;
+  border: 1px solid var(--CN-border);
 
   background: rgba(255, 255, 255, 0.95);
 
@@ -4144,66 +4120,78 @@ body {
 
   cursor: pointer;
 
+  transition: all 0.3s ease;
+
   z-index: 20;
-
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-
-  transition: 0.3s ease;
 }
 
 .cn-slider-arrow:hover {
   background: var(--CN-primary);
   color: white;
+
+  transform: translateY(-50%) scale(1.08);
 }
 
-.cn-prev {
-  left: -20px;
+.cn-left {
+  left: 25px;
 }
 
-.cn-next {
-  right: -20px;
+.cn-right {
+  right: 25px;
 }
 
-/* ==========================================
-   PAGINATION
-========================================== */
+/* ========================================
+   DOTS
+======================================== */
 
-.swiper-pagination {
-  bottom: 0 !important;
+.cn-slider-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  gap: 12px;
+
+  margin-top: 30px;
 }
 
-.swiper-pagination-bullet {
+.cn-dot {
   width: 12px;
   height: 12px;
 
-  opacity: 1;
+  border: none;
 
-  background: #d1d5db;
+  border-radius: 999px;
+
+  background: var(--CN-border);
+
+  cursor: pointer;
 
   transition: all 0.3s ease;
 }
 
-.swiper-pagination-bullet-active {
-  width: 36px;
+.cn-dot:hover {
+  background: var(--CN-secondary);
+}
 
-  border-radius: 999px;
+.cn-dot.active {
+  width: 38px;
 
   background: var(--CN-secondary);
 }
 
-/* ==========================================
-   TABLET
-========================================== */
+/* ========================================
+   RESPONSIVE
+======================================== */
 
-@media (max-width: 1199px) {
-  .cn-gallery-card {
-    height: 460px;
+@media (max-width: 1024px) {
+  .cn-slider-wrapper {
+    height: 520px;
+  }
+
+  .cn-gallery-header {
+    margin-bottom: 50px;
   }
 }
-
-/* ==========================================
-   MOBILE
-========================================== */
 
 @media (max-width: 768px) {
   .cn-gallery-slider {
@@ -4211,32 +4199,60 @@ body {
   }
 
   .cn-gallery-title {
-    font-size: 2.3rem;
+    font-size: 2.5rem;
   }
 
-  .cn-gallery-card {
+  .cn-gallery-text {
+    font-size: 0.98rem;
+  }
+
+  .cn-slider-wrapper {
     height: 380px;
+    border-radius: 24px;
+  }
+
+  .cn-slide-content {
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+
+    max-width: unset;
+
+    padding: 18px;
+  }
+
+  .cn-slide-content h3 {
+    font-size: 1.1rem;
   }
 
   .cn-slider-arrow {
-    display: none;
+    width: 46px;
+    height: 46px;
+  }
+
+  .cn-left {
+    left: 12px;
+  }
+
+  .cn-right {
+    right: 12px;
   }
 }
-
-/* ==========================================
-   SMALL MOBILE
-========================================== */
 
 @media (max-width: 480px) {
   .cn-gallery-title {
     font-size: 2rem;
   }
 
+  .cn-gallery-subtitle {
+    font-size: 0.8rem;
+  }
+
   .cn-gallery-btn {
     width: 100%;
   }
 
-  .cn-gallery-card {
+  .cn-slider-wrapper {
     height: 300px;
   }
 }
