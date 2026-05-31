@@ -44,7 +44,6 @@ const AdminSettings = () => {
     setStatus("");
     setLoading(true);
 
-    // ✅ SAME AS OLD WEBSITE (frontend secret check)
     if (form.secret !== "mySecret123") {
       setStatus("❌ Invalid secret code.");
       setLoading(false);

@@ -2,42 +2,130 @@
 // AdminGallery.jsx
 // ========================================
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Upload, Trash2, ImageIcon } from "lucide-react";
 
 export default function AdminGallery() {
   const [title, setTitle] = useState("");
   const [image, setImage] = useState(null);
 
-  const handleSubmit = (e) => {
+  const [galleryImages, setGalleryImages] = useState([]);
+
+  const [loading, setLoading] = useState(false);
+
+  const [status, setStatus] = useState("");
+
+  // ===============================
+  // FETCH IMAGES
+  // ===============================
+
+  const fetchImages = async () => {
+    try {
+      const res = await fetch("/api/gallery-images");
+
+      const data = await res.json();
+
+      setGalleryImages(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchImages();
+  }, []);
+
+  // ===============================
+  // UPLOAD
+  // ===============================
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log({
-      title,
-      image,
-    });
+    if (!image) return;
 
-    // Upload to backend later
+    setLoading(true);
+    setStatus("");
 
-    setTitle("");
-    setImage(null);
+    try {
+      const formData = new FormData();
+
+      formData.append("title", title);
+      formData.append("image", image);
+
+      const res = await fetch("/api/gallery-upload", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || "Upload failed");
+      }
+
+      setStatus("✅ Image uploaded successfully");
+
+      setTitle("");
+      setImage(null);
+
+      fetchImages();
+    } catch (error) {
+      setStatus("❌ " + error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // ===============================
+  // DELETE
+  // ===============================
+
+  const handleDelete = async (id) => {
+    const confirmDelete = window.confirm("Delete this image?");
+
+    if (!confirmDelete) return;
+
+    try {
+      const res = await fetch("/api/gallery-delete", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error);
+      }
+
+      fetchImages();
+    } catch (error) {
+      console.error(error);
+      alert("Failed to delete image");
+    }
   };
 
   return (
     <section className="cn-admin-gallery">
       <div className="cn-admin-container">
+        {/* HEADER */}
+
         <div className="cn-admin-header">
           <span>Gallery Manager</span>
 
           <h2>Upload Gallery Photos</h2>
 
           <p>
-            Add images that will automatically appear in the homepage gallery
-            slider.
+            Add images that automatically appear in the homepage gallery slider.
           </p>
         </div>
 
-        {/* Upload Form */}
+        {/* FORM */}
 
         <form className="cn-gallery-form" onSubmit={handleSubmit}>
           <div className="cn-upload-box">
@@ -60,40 +148,35 @@ export default function AdminGallery() {
             onChange={(e) => setTitle(e.target.value)}
           />
 
-          <button type="submit">
+          {status && <p className="cn-gallery-status">{status}</p>}
+
+          <button type="submit" disabled={loading}>
             <Upload size={18} />
-            Upload Photo
+
+            {loading ? "Uploading..." : "Upload Photo"}
           </button>
         </form>
 
-        {/* Uploaded Images */}
+        {/* GALLERY */}
 
         <div className="cn-gallery-grid">
-          <div className="cn-gallery-card">
-            <img
-              src="https://images.unsplash.com/photo-1593113598332-cd59a93b2d4f"
-              alt=""
-            />
+          {galleryImages.length === 0 && <p>No images uploaded yet.</p>}
 
-            <div className="cn-gallery-overlay">
-              <button>
-                <Trash2 size={18} />
-              </button>
+          {galleryImages.map((item) => (
+            <div key={item._id} className="cn-gallery-card">
+              <img src={item.imageUrl} alt={item.title} />
+
+              <div className="cn-gallery-overlay">
+                <button onClick={() => handleDelete(item._id)}>
+                  <Trash2 size={18} />
+                </button>
+              </div>
+
+              {item.title && (
+                <div className="cn-gallery-title">{item.title}</div>
+              )}
             </div>
-          </div>
-
-          <div className="cn-gallery-card">
-            <img
-              src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c"
-              alt=""
-            />
-
-            <div className="cn-gallery-overlay">
-              <button>
-                <Trash2 size={18} />
-              </button>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>
