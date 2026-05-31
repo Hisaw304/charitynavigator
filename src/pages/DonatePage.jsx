@@ -31,6 +31,14 @@ const RECAPTCHA_SITE_KEY = "6LeoOQUtAAAAAOVKlZ3ezYQBlbvk96u4zTio5mK5";
 export default function Donate() {
   const navigate = useNavigate();
 
+  const copyToClipboard = async (text) => {
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const [donationSettings, setDonationSettings] = useState(null);
 
   useEffect(() => {
@@ -568,67 +576,127 @@ export default function Donate() {
               </button>
             </form>
           </motion.div>
-
-          {donationSettings && (
-            <div className="cn-payment-grid">
-              <div className="cn-payment-card">
-                <div id="crypto-section" className="cn-payment-header">
-                  <FaBitcoin />
-                  <h3>Crypto Donation</h3>
-                </div>
-
-                <p className="cn-payment-text">Send to this address:</p>
-
-                <div className="cn-payment-code">
-                  {donationSettings.cryptoAddress}
-                </div>
-              </div>
-
-              <div className="cn-payment-card">
-                <div id="cashapp-section" className="cn-payment-header">
-                  <SiCashapp />
-                  <h3>Cash App</h3>
-                </div>
-
-                <div className="cn-payment-value">
-                  ${donationSettings.cashAppTag}
-                </div>
-              </div>
-
-              <div className="cn-payment-card">
-                <div id="zelle-section" className="cn-payment-header">
-                  <SiZelle />
-                  <h3>Zelle</h3>
-                </div>
-
-                <p className="cn-payment-text">{donationSettings.zelleInfo}</p>
-              </div>
-
-              <div id="wire-section" className="cn-payment-card">
-                <div className="cn-payment-header">
-                  <FaUniversity />
-                  <h3>Wire Transfer</h3>
-                </div>
-
-                <p className="cn-payment-text cn-payment-multiline">
-                  {donationSettings.wireTransfer}
-                </p>
-              </div>
-
-              <div id="paypal-section" className="cn-payment-card">
-                <div className="cn-payment-header">
-                  <FaPaypal />
-                  <h3>PayPal</h3>
-                </div>
-
-                <p className="cn-payment-text">
-                  {donationSettings.paypalEmail}
-                </p>
-              </div>
-            </div>
-          )}
         </div>
       </div>
+      {donationSettings && (
+        <section className="cn-donate-methods">
+          <div className="cn-donate-methods-grid">
+            {/* CRYPTO */}
+
+            <div className="cn-donate-method-card">
+              <div className="cn-donate-method-top">
+                <div className="cn-donate-method-icon">
+                  <FaBitcoin />
+                </div>
+
+                <h3>Crypto Donation</h3>
+              </div>
+
+              <p className="cn-donate-method-label">Wallet Address</p>
+
+              <div className="cn-donate-method-box">
+                <span>{donationSettings.cryptoAddress}</span>
+
+                <button
+                  onClick={() =>
+                    copyToClipboard(donationSettings.cryptoAddress)
+                  }
+                >
+                  <FaCopy />
+                </button>
+              </div>
+            </div>
+
+            {/* CASHAPP */}
+
+            <div className="cn-donate-method-card">
+              <div className="cn-donate-method-top">
+                <div className="cn-donate-method-icon">
+                  <SiCashapp />
+                </div>
+
+                <h3>Cash App</h3>
+              </div>
+
+              <div className="cn-donate-method-box">
+                <span>${donationSettings.cashAppTag}</span>
+
+                <button
+                  onClick={() => copyToClipboard(donationSettings.cashAppTag)}
+                >
+                  <FaCopy />
+                </button>
+              </div>
+            </div>
+
+            {/* ZELLE */}
+
+            <div className="cn-donate-method-card">
+              <div className="cn-donate-method-top">
+                <div className="cn-donate-method-icon">
+                  <SiZelle />
+                </div>
+
+                <h3>Zelle</h3>
+              </div>
+
+              <div className="cn-donate-method-box">
+                <span>{donationSettings.zelleInfo}</span>
+
+                <button
+                  onClick={() => copyToClipboard(donationSettings.zelleInfo)}
+                >
+                  <FaCopy />
+                </button>
+              </div>
+            </div>
+
+            {/* WIRE */}
+
+            <div className="cn-donate-method-card">
+              <div className="cn-donate-method-top">
+                <div className="cn-donate-method-icon">
+                  <FaUniversity />
+                </div>
+
+                <h3>Wire Transfer</h3>
+              </div>
+
+              <div className="cn-donate-method-box cn-donate-method-large">
+                <span>{donationSettings.wireTransfer}</span>
+
+                <button
+                  onClick={() => copyToClipboard(donationSettings.wireTransfer)}
+                >
+                  <FaCopy />
+                </button>
+              </div>
+            </div>
+
+            {/* PAYPAL */}
+
+            <div className="cn-donate-method-card">
+              <div className="cn-donate-method-top">
+                <div className="cn-donate-method-icon">
+                  <FaPaypal />
+                </div>
+
+                <h3>PayPal</h3>
+              </div>
+
+              <div className="cn-donate-method-box">
+                <span>{donationSettings.paypalEmail}</span>
+
+                <button
+                  onClick={() => copyToClipboard(donationSettings.paypalEmail)}
+                >
+                  <FaCopy />
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
     </section>
   );
 }
