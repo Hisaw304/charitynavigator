@@ -1,19 +1,17 @@
-// ========================================
-// GallerySlider.jsx
-// ========================================
-
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
+
 import { ChevronLeft, ChevronRight } from "lucide-react";
+
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 export default function GallerySlider() {
   const [images, setImages] = useState([]);
-  const [current, setCurrent] = useState(0);
-  const [direction, setDirection] = useState(0);
-
-  // ========================
-  // FETCH IMAGES
-  // ========================
 
   useEffect(() => {
     const fetchImages = async () => {
@@ -30,56 +28,12 @@ export default function GallerySlider() {
     fetchImages();
   }, []);
 
-  // ========================
-  // AUTO SLIDE
-  // ========================
-
-  useEffect(() => {
-    if (!images.length) return;
-
-    const interval = setInterval(() => {
-      nextSlide();
-    }, 5000);
-
-    return () => clearInterval(interval);
-  }, [current, images]);
-
-  // ========================
-  // NAVIGATION
-  // ========================
-
-  const nextSlide = () => {
-    setDirection(1);
-
-    setCurrent((prev) => (prev === images.length - 1 ? 0 : prev + 1));
-  };
-
-  const prevSlide = () => {
-    setDirection(-1);
-
-    setCurrent((prev) => (prev === 0 ? images.length - 1 : prev - 1));
-  };
-
-  // ========================
-  // DRAG / SWIPE
-  // ========================
-
-  const handleDragEnd = (event, info) => {
-    if (info.offset.x < -100) {
-      nextSlide();
-    }
-
-    if (info.offset.x > 100) {
-      prevSlide();
-    }
-  };
-
   if (!images.length) return null;
 
   return (
     <section className="cn-gallery-slider">
       <div className="cn-gallery-container">
-        {/* ================= HEADING ================= */}
+        {/* HEADER */}
 
         <motion.div
           className="cn-gallery-header"
@@ -108,67 +62,69 @@ export default function GallerySlider() {
           </a>
         </motion.div>
 
-        {/* ================= SLIDER ================= */}
+        {/* SLIDER */}
 
-        <div className="cn-slider-wrapper">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={images[current]._id}
-              className="cn-slide"
-              drag="x"
-              dragConstraints={{ left: 0, right: 0 }}
-              onDragEnd={handleDragEnd}
-              initial={{
-                x: direction > 0 ? 400 : -400,
-                opacity: 0,
-              }}
-              animate={{
-                x: 0,
-                opacity: 1,
-              }}
-              exit={{
-                x: direction > 0 ? -400 : 400,
-                opacity: 0,
-              }}
-              transition={{
-                duration: 0.5,
-                ease: "easeInOut",
-              }}
-            >
-              <img src={images[current].imageUrl} alt={images[current].title} />
+        <div className="cn-slider-section">
+          <button className="cn-slider-arrow cn-prev">
+            <ChevronLeft size={26} />
+          </button>
 
-              {images[current].title && (
-                <div className="cn-slide-content">
-                  <h3>{images[current].title}</h3>
+          <button className="cn-slider-arrow cn-next">
+            <ChevronRight size={26} />
+          </button>
+
+          <Swiper
+            modules={[Navigation, Pagination, Autoplay]}
+            loop={true}
+            speed={800}
+            preloadImages={true}
+            watchSlidesProgress={true}
+            observer={true}
+            observeParents={true}
+            autoplay={{
+              delay: 5000,
+              disableOnInteraction: false,
+              pauseOnMouseEnter: true,
+            }}
+            navigation={{
+              prevEl: ".cn-prev",
+              nextEl: ".cn-next",
+            }}
+            pagination={{
+              clickable: true,
+            }}
+            spaceBetween={24}
+            breakpoints={{
+              0: {
+                slidesPerView: 1,
+              },
+              768: {
+                slidesPerView: 2,
+              },
+              1200: {
+                slidesPerView: 3,
+              },
+            }}
+            className="cn-gallery-swiper"
+          >
+            {images.map((item) => (
+              <SwiperSlide key={item._id}>
+                <div className="cn-gallery-card">
+                  <img
+                    src={item.imageUrl}
+                    alt={item.title || "Gallery"}
+                    loading="lazy"
+                  />
+
+                  {item.title && (
+                    <div className="cn-slide-content">
+                      <h3>{item.title}</h3>
+                    </div>
+                  )}
                 </div>
-              )}
-            </motion.div>
-          </AnimatePresence>
-
-          {/* ARROWS */}
-
-          <button className="cn-slider-arrow cn-left" onClick={prevSlide}>
-            <ChevronLeft size={28} />
-          </button>
-
-          <button className="cn-slider-arrow cn-right" onClick={nextSlide}>
-            <ChevronRight size={28} />
-          </button>
-        </div>
-
-        {/* DOTS */}
-
-        <div className="cn-slider-dots">
-          {images.map((_, index) => (
-            <button
-              key={index}
-              className={`cn-dot ${current === index ? "active" : ""}`}
-              onClick={() => {
-                setDirection(index > current ? 1 : -1);
-                setCurrent(index);
-              }}
-            />
-          ))}
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
       </div>
     </section>
