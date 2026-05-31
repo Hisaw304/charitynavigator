@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 
 // MAIN HERO IMAGE
 import heroMain from "../assets/hero-main.jpg";
-
+import { Link } from "react-router-dom";
 // FLOATING IMAGES
 import heroSmallOne from "../assets/hero-small-1.jpg";
 import heroSmallTwo from "../assets/hero-small-2.jpg";
@@ -87,15 +87,28 @@ export default function Hero() {
             </motion.p>
 
             {/* BUTTONS */}
+
             <motion.div
               initial={{ opacity: 0, y: 25 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6 }}
               className="cn-hero-buttons"
             >
-              <button className="cn-hero-primary-btn">Donate Now</button>
+              <button
+                className="cn-hero-primary-btn"
+                onClick={() => {
+                  const el = document.getElementById("donate");
+                  if (el) {
+                    el.scrollIntoView({ behavior: "smooth" });
+                  }
+                }}
+              >
+                Donate Now
+              </button>
 
-              <button className="cn-hero-secondary-btn">Learn More</button>
+              <Link to="/about">
+                <button className="cn-hero-secondary-btn">Learn More</button>
+              </Link>
             </motion.div>
           </div>
         </motion.div>

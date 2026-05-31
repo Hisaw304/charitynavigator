@@ -183,6 +183,7 @@ export default function Donate() {
           {/* ================= DONATION FORM ================= */}
 
           <motion.div
+            id="donate"
             className="cn-donate-card"
             initial={{ opacity: 0, y: 60 }}
             whileInView={{ opacity: 1, y: 0 }}

@@ -24,10 +24,10 @@ export default function Navbar() {
         <div className="cn-container cn-topbar-content">
           <p className="cn-topbar-text">Non Profit Organization</p>
 
-          <button className="cn-support-btn">
+          <a href="/donate" className="cn-support-btn">
             <HeartHandshake size={18} />
             Support Charity Navigator Now
-          </button>
+          </a>
         </div>
       </div>
 
