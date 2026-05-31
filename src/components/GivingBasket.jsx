@@ -29,7 +29,9 @@ export default function GivingBasket() {
             your information you share with each organization.
           </p>
 
-          <button className="cn-basket-btn">Learn More</button>
+          <a href="/about" className="cn-basket-btn">
+            Learn More
+          </a>
         </motion.div>
 
         {/* VIDEO */}

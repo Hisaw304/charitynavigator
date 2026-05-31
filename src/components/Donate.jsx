@@ -358,58 +358,61 @@ export default function Donate() {
               </button>
             </form>
           </motion.div>
-          <div className="cn-payment-card">
-            <FaBitcoin />
-            <h4>Crypto</h4>
-            <p>Support through cryptocurrency.</p>
 
-            <Link to="/donate">
-              <button>Donate with Crypto</button>
-            </Link>
-          </div>
+          <div className="cn-payment-grid">
+            <div className="cn-payment-card">
+              <FaBitcoin />
+              <h4>Crypto</h4>
+              <p>Support through cryptocurrency.</p>
 
-          <div className="cn-payment-card">
-            <FaPaypal />
-            <h4>PayPal</h4>
-            <p>Fast and secure online giving.</p>
+              <Link to="/donate">
+                <button>Donate with Crypto</button>
+              </Link>
+            </div>
 
-            <Link to="/donate">
-              <button>Donate with PayPal</button>
-            </Link>
-          </div>
+            <div className="cn-payment-card">
+              <FaPaypal />
+              <h4>PayPal</h4>
+              <p>Fast and secure online giving.</p>
 
-          <div className="cn-payment-card">
-            <SiCashapp />
-            <h4>Cash App</h4>
-            <p>Send support instantly.</p>
+              <Link to="/donate">
+                <button>Donate with PayPal</button>
+              </Link>
+            </div>
 
-            <Link to="/donate">
-              <button>Donate with Cash App</button>
-            </Link>
-          </div>
+            <div className="cn-payment-card">
+              <SiCashapp />
+              <h4>Cash App</h4>
+              <p>Send support instantly.</p>
 
-          <div className="cn-payment-card">
-            <SiZelle />
-            <h4>Zelle</h4>
-            <p>Quick direct transfers.</p>
+              <Link to="/donate">
+                <button>Donate with Cash App</button>
+              </Link>
+            </div>
 
-            <Link to="/donate">
-              <button>Donate with Zelle</button>
-            </Link>
-          </div>
+            <div className="cn-payment-card">
+              <SiZelle />
+              <h4>Zelle</h4>
+              <p>Quick direct transfers.</p>
 
-          <div className="cn-wire-card">
-            <FaUniversity />
-            <h3>Wire Transfer</h3>
+              <Link to="/donate">
+                <button>Donate with Zelle</button>
+              </Link>
+            </div>
 
-            <p>
-              Contact our team for secure wire transfer instructions and
-              additional information.
-            </p>
+            <div className="cn-wire-card">
+              <FaUniversity />
+              <h3>Wire Transfer</h3>
 
-            <Link to="/donate">
-              <button>Request Instructions</button>
-            </Link>
+              <p>
+                Donate through wire transfer, secure wire transfer instructions
+                and additional information.
+              </p>
+
+              <Link to="/donate">
+                <button>Request Instructions</button>
+              </Link>
+            </div>
           </div>
         </div>
       </div>

@@ -42,7 +42,9 @@ export default function DonorBasics() {
             <h2 className="cn-donor-title">Donor Basics</h2>
           </div>
 
-          <button className="cn-donor-view-btn">See More</button>
+          <a href="/about" className="cn-donor-view-btn">
+            See More
+          </a>
         </div>
 
         <div className="cn-donor-grid">
@@ -73,7 +75,9 @@ export default function DonorBasics() {
 
                 <p>{card.description}</p>
 
-                <button className="cn-donor-btn">Learn More →</button>
+                <a href="/contact" className="cn-donor-btn">
+                  Learn More →
+                </a>
               </div>
             </motion.div>
           ))}

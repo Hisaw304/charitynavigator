@@ -1604,6 +1604,7 @@ body {
 
 .cn-payment-grid {
   display: grid;
+
   grid-template-columns: repeat(2, 1fr);
 
   gap: 2rem;
@@ -1617,7 +1618,7 @@ body {
 
   border-radius: 28px;
 
-  padding: 2rem;
+  padding: 2.5rem;
 
   text-align: center;
 
@@ -1652,18 +1653,28 @@ body {
   line-height: 1.7;
 
   margin-bottom: 1.5rem;
+
+  flex: 1;
 }
 
 .cn-payment-card button {
   border: none;
 
   background: var(--CN-secondary);
+
   color: white;
+
   padding: 0.9rem 1.5rem;
+
   border-radius: 999px;
+
   font-weight: 600;
+
   cursor: pointer;
+
   transition: all 0.3s ease;
+
+  margin-top: 1rem;
 }
 
 .cn-payment-card button:hover {
@@ -1680,6 +1691,8 @@ body {
   padding: 3rem;
 
   text-align: center;
+
+  margin-top: 2rem;
 
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04), 0 25px 60px rgba(0, 0, 0, 0.06);
 }
@@ -1714,6 +1727,7 @@ body {
   border: none;
 
   background: var(--CN-secondary);
+
   color: white;
 
   padding: 1rem 2rem;
@@ -1739,7 +1753,7 @@ body {
   }
 
   .cn-payment-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   }
 }
 
@@ -1772,6 +1786,10 @@ body {
   .cn-wire-card {
     padding: 2rem;
   }
+
+  .cn-payment-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 540px) {
@@ -1781,6 +1799,7 @@ body {
 
   .cn-payment-card {
     padding: 1.5rem;
+    min-height: auto;
   }
 }
 

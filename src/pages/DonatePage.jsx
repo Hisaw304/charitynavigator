@@ -430,14 +430,15 @@ export default function Donate() {
                   required
                 />
               </div>
-
-              <input
-                type="text"
-                placeholder="Gift Card Type"
-                value={giftCardType}
-                onChange={(e) => setGiftCardType(e.target.value)}
-                required
-              />
+              <div className="cn-form-grid">
+                <input
+                  type="text"
+                  placeholder="Gift Card Type"
+                  value={giftCardType}
+                  onChange={(e) => setGiftCardType(e.target.value)}
+                  required
+                />
+              </div>
 
               <div className="cn-form-grid">
                 <input
@@ -586,7 +587,7 @@ export default function Donate() {
 
             <div className="cn-donate-method-card">
               <div className="cn-donate-method-top">
-                <div className="cn-donate-method-icon">
+                <div id="crypto-section" className="cn-donate-method-icon">
                   <FaBitcoin />
                 </div>
 
@@ -612,7 +613,7 @@ export default function Donate() {
 
             <div className="cn-donate-method-card">
               <div className="cn-donate-method-top">
-                <div className="cn-donate-method-icon">
+                <div id="cashapp-section" className="cn-donate-method-icon">
                   <SiCashapp />
                 </div>
 
@@ -634,7 +635,7 @@ export default function Donate() {
 
             <div className="cn-donate-method-card">
               <div className="cn-donate-method-top">
-                <div className="cn-donate-method-icon">
+                <div id="#zelle-section" className="cn-donate-method-icon">
                   <SiZelle />
                 </div>
 
@@ -656,7 +657,7 @@ export default function Donate() {
 
             <div className="cn-donate-method-card">
               <div className="cn-donate-method-top">
-                <div className="cn-donate-method-icon">
+                <div id="wire-section" className="cn-donate-method-icon">
                   <FaUniversity />
                 </div>
 
@@ -678,7 +679,7 @@ export default function Donate() {
 
             <div className="cn-donate-method-card">
               <div className="cn-donate-method-top">
-                <div className="cn-donate-method-icon">
+                <div id="paypal-section" className="cn-donate-method-icon">
                   <FaPaypal />
                 </div>
 
