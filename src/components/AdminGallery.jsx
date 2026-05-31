@@ -4,7 +4,7 @@
 
 import { useEffect, useState } from "react";
 import { Upload, Trash2, ImageIcon } from "lucide-react";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 export default function AdminGallery() {
   const [title, setTitle] = useState("");
   const [image, setImage] = useState(null);
