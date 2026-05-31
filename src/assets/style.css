@@ -1789,8 +1789,10 @@ body {
 ========================================== */
 
 .cn-donate-methods {
-  max-width: 1300px;
-  margin: 4rem auto 0;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
 }
 
 .cn-donate-methods-grid {
