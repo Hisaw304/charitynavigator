@@ -1797,10 +1797,11 @@ body {
 
 .cn-donate-methods-grid {
   display: grid;
-
+  columns: 3;
+  column-gap: 1.5rem;
   grid-template-columns: repeat(3, 1fr);
-
   gap: 1.5rem;
+  align-items: start;
 }
 
 /* ==========================================
@@ -1819,6 +1820,7 @@ body {
   box-shadow: 0 15px 40px rgba(15, 23, 42, 0.05);
 
   transition: all 0.3s ease;
+  height: fit-content;
 }
 
 .cn-donate-method-card:hover {
@@ -1954,13 +1956,13 @@ body {
 
 @media (max-width: 1024px) {
   .cn-donate-methods-grid {
-    grid-template-columns: repeat(2, 1fr);
+    columns: 2;
   }
 }
 
 @media (max-width: 768px) {
   .cn-donate-methods-grid {
-    grid-template-columns: 1fr;
+    columns: 1;
   }
 }
 /* ========================================
@@ -1977,7 +1979,6 @@ body {
 .cn-funds-container {
   width: 100%;
   max-width: 1300px;
-
   margin: 0 auto;
   padding: 0 2rem;
 }
