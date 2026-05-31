@@ -47,7 +47,9 @@ export default function AboutSection() {
             power our unbiased ratings so that you can give with confidence.
           </p>
 
-          <button className="cn-about-btn">Learn More About Us</button>
+          <a href="/about" className="cn-about-btn">
+            Learn More About Us
+          </a>
         </motion.div>
       </div>
     </section>

@@ -40,7 +40,9 @@ export default function CausewayFunds() {
             <h2 className="cn-funds-title">Causeway Funds</h2>
           </div>
 
-          <button className="cn-funds-view-btn">View All</button>
+          <a href="/about" className="cn-funds-view-btn">
+            View All
+          </a>
         </div>
 
         <div className="cn-funds-grid">

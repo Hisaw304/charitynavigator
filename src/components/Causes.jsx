@@ -43,7 +43,7 @@ export default function Causes() {
             <h2 className="cn-causes-title">Discover Charities</h2>
           </div>
 
-          <button className="cn-causes-view-btn">View All</button>
+          <a className="cn-causes-view-btn">View All</a>
         </div>
 
         {/* ================= CARDS ================= */}
@@ -73,7 +73,9 @@ export default function Causes() {
 
                 <p className="cn-cause-description">{cause.description}</p>
 
-                <button className="cn-cause-btn">Learn More</button>
+                <a href="/about" className="cn-cause-btn">
+                  Learn More
+                </a>
               </div>
             </motion.div>
           ))}

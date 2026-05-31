@@ -5,7 +5,7 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { Plus, Minus } from "lucide-react";
-
+import { Link } from "react-router-dom";
 import methodologyImg from "../assets/methodology.jpg";
 import teamImg from "../assets/team.jpg";
 import leadershipImg from "../assets/leadership.jpg";
@@ -148,7 +148,6 @@ const AboutPage = () => {
 
           <div className="cn-about-links-grid">
             {/* CARD 1 */}
-
             <div className="cn-about-card">
               <img src={methodologyImg} alt="Methodology" />
 
@@ -161,12 +160,13 @@ const AboutPage = () => {
                   issues.
                 </p>
 
-                <button>Learn More →</button>
+                <Link to="/contact" className="cn-about-btn">
+                  Learn More →
+                </Link>
               </div>
             </div>
 
             {/* CARD 2 */}
-
             <div className="cn-about-card">
               <img src={teamImg} alt="Our Team" />
 
@@ -178,12 +178,13 @@ const AboutPage = () => {
                   ahead.
                 </p>
 
-                <button>Learn More →</button>
+                <Link to="/contact" className="cn-about-btn">
+                  Learn More →
+                </Link>
               </div>
             </div>
 
             {/* CARD 3 */}
-
             <div className="cn-about-card">
               <img src={leadershipImg} alt="Thought Leadership" />
 
@@ -195,12 +196,13 @@ const AboutPage = () => {
                   the future of charitable giving.
                 </p>
 
-                <button>Learn More →</button>
+                <Link to="/contact" className="cn-about-btn">
+                  Learn More →
+                </Link>
               </div>
             </div>
 
             {/* CARD 4 */}
-
             <div className="cn-about-card">
               <img src={financialsImg} alt="Financials" />
 
@@ -212,12 +214,13 @@ const AboutPage = () => {
                   and resources donors depend on.
                 </p>
 
-                <button>Learn More →</button>
+                <Link to="/contact" className="cn-about-btn">
+                  Learn More →
+                </Link>
               </div>
             </div>
 
             {/* CARD 5 */}
-
             <div className="cn-about-card">
               <img src={careersImg} alt="Careers" />
 
@@ -229,12 +232,13 @@ const AboutPage = () => {
                   today.
                 </p>
 
-                <button>Learn More →</button>
+                <Link to="/contact" className="cn-about-btn">
+                  Learn More →
+                </Link>
               </div>
             </div>
 
             {/* CARD 6 */}
-
             <div className="cn-about-card">
               <img src={pressImg} alt="Press Room" />
 
@@ -243,7 +247,9 @@ const AboutPage = () => {
 
                 <p>Explore our recent press coverage and media resources.</p>
 
-                <button>Learn More →</button>
+                <Link to="/contact" className="cn-about-btn">
+                  Learn More →
+                </Link>
               </div>
             </div>
           </div>
