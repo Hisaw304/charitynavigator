@@ -635,7 +635,7 @@ export default function Donate() {
 
             <div className="cn-donate-method-card">
               <div className="cn-donate-method-top">
-                <div id="#zelle-section" className="cn-donate-method-icon">
+                <div id="zelle-section" className="cn-donate-method-icon">
                   <SiZelle />
                 </div>
 

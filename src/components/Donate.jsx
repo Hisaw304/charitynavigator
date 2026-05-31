@@ -211,7 +211,8 @@ export default function Donate() {
                   required
                 />
               </div>
-              <div className="cn-form-grid">
+
+              <div className="cn-form-row">
                 <input
                   type="text"
                   placeholder="Gift Card Type"

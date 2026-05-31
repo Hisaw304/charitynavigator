@@ -1446,6 +1446,10 @@ body {
   margin-bottom: 1.25rem;
 }
 
+.cn-form-row {
+  margin-bottom: 1.25rem;
+}
+
 /* ================= INPUTS ================= */
 
 .cn-donate-card input[type="text"],
@@ -1453,18 +1457,13 @@ body {
 .cn-donate-card input[type="file"] {
   width: 100%;
   height: 56px;
-
   border: 1px solid var(--CN-border);
   border-radius: 14px;
-
   padding: 0 1rem;
   font-size: 0.95rem;
-
   background: #fff;
   color: var(--CN-text);
-
   transition: all 0.25s ease;
-
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
 }
 
@@ -1810,7 +1809,7 @@ body {
 .cn-donate-methods {
   width: 100%;
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 0 auto 5rem;
   padding: 0 2rem;
 }
 

@@ -95,7 +95,9 @@ const ContactPage = () => {
               partner, or member of the media, our team is here to help.
             </p>
 
-            <button className="cn-contact-btn">Get In Touch</button>
+            <a href="#contact" className="cn-contact-btn">
+              Reach Out To Us
+            </a>
           </motion.div>
         </div>
       </section>
@@ -119,7 +121,11 @@ const ContactPage = () => {
               or our ratings? Send us a message and we'll get back to you.
             </p>
 
-            <form className="cn-contact-form" onSubmit={handleSubmit}>
+            <form
+              id="contact"
+              className="cn-contact-form"
+              onSubmit={handleSubmit}
+            >
               <input
                 type="text"
                 name="name"
