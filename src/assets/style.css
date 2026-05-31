@@ -3912,17 +3912,17 @@ body {
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
 }
 /* ========================================
-   GallerySlider.css
+   SECTION
 ======================================== */
 
 .cn-gallery-slider {
-  padding: 100px 20px;
+  padding: 110px 20px;
   background: var(--CN-body);
   overflow: hidden;
 }
 
 .cn-gallery-container {
-  max-width: 1300px;
+  max-width: 1400px;
   margin: 0 auto;
 }
 
@@ -3931,8 +3931,8 @@ body {
 ======================================== */
 
 .cn-gallery-header {
-  max-width: 800px;
-  margin: 0 auto 60px;
+  max-width: 820px;
+  margin: 0 auto 70px;
   text-align: center;
 }
 
@@ -3955,9 +3955,9 @@ body {
 }
 
 .cn-gallery-title {
-  font-size: clamp(2.3rem, 5vw, 4.2rem);
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
   font-weight: 700;
-  line-height: 1.15;
+  line-height: 1.1;
 
   color: var(--CN-primary);
 
@@ -3976,7 +3976,7 @@ body {
 }
 
 /* ========================================
-   CTA BUTTON
+   BUTTON
 ======================================== */
 
 .cn-gallery-btn {
@@ -3993,95 +3993,104 @@ body {
 
   text-decoration: none;
   font-weight: 600;
-  font-size: 0.95rem;
 
   transition: all 0.3s ease;
 }
 
 .cn-gallery-btn:hover {
-  background: var(--CN-hover);
-
   transform: translateY(-3px);
-
-  box-shadow: 0 15px 35px rgba(7, 42, 87, 0.18);
+  background: var(--CN-hover);
 }
 
 /* ========================================
-   SLIDER WRAPPER
+   SWIPER SECTION
 ======================================== */
 
-.cn-slider-wrapper {
+.cn-slider-section {
   position: relative;
 
   width: 100%;
-  height: 650px;
+
+  padding-inline: 70px;
+}
+
+/* ========================================
+   SWIPER
+======================================== */
+
+.cn-gallery-swiper {
+  width: 100%;
+  padding-bottom: 70px;
+}
+
+.swiper {
+  overflow: visible !important;
+}
+
+.swiper-slide {
+  height: auto;
+}
+
+/* ========================================
+   CARD
+======================================== */
+
+.cn-gallery-card {
+  position: relative;
+
+  height: 680px; /* Increased height */
 
   overflow: hidden;
 
-  border-radius: 30px;
+  border-radius: 28px;
 
-  background: var(--CN-surface);
+  background: #f3f4f6;
 
   box-shadow: 0 20px 60px rgba(15, 23, 42, 0.08);
 }
 
-/* ========================================
-   SLIDE
-======================================== */
-
-.cn-slide {
-  position: relative;
-
-  width: 100%;
-  height: 100%;
-
-  cursor: grab;
-}
-
-.cn-slide:active {
-  cursor: grabbing;
-}
-
-.cn-slide img {
+.cn-gallery-card img {
   width: 100%;
   height: 100%;
 
   object-fit: cover;
+
   display: block;
+
+  user-select: none;
+  -webkit-user-drag: none;
+
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 /* ========================================
-   IMAGE OVERLAY CARD
+   CONTENT
 ======================================== */
 
 .cn-slide-content {
   position: absolute;
 
-  left: 35px;
-  bottom: 35px;
+  left: 20px;
+  right: 20px;
+  bottom: 20px;
 
-  max-width: 450px;
+  padding: 20px;
 
-  padding: 22px 28px;
+  border-radius: 20px;
 
-  background: rgba(255, 255, 255, 0.96);
+  background: rgba(255, 255, 255, 0.94);
 
-  backdrop-filter: blur(12px);
-
-  border: 1px solid var(--CN-border);
-
-  border-radius: 22px;
-
-  box-shadow: 0 15px 40px rgba(15, 23, 42, 0.1);
+  backdrop-filter: blur(10px);
 }
 
 .cn-slide-content h3 {
+  margin: 0;
+
   color: var(--CN-primary);
 
-  font-size: 1.35rem;
+  font-size: 1.2rem;
   font-weight: 700;
-
-  line-height: 1.4;
 }
 
 /* ========================================
@@ -4095,13 +4104,14 @@ body {
 
   transform: translateY(-50%);
 
-  width: 56px;
-  height: 56px;
+  width: 60px;
+  height: 60px;
+
+  border: none;
 
   border-radius: 50%;
-  border: 1px solid var(--CN-border);
 
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.96);
 
   color: var(--CN-primary);
 
@@ -4111,9 +4121,11 @@ body {
 
   cursor: pointer;
 
-  transition: all 0.3s ease;
+  z-index: 100;
 
-  z-index: 20;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+
+  transition: all 0.3s ease;
 }
 
 .cn-slider-arrow:hover {
@@ -4124,65 +4136,57 @@ body {
 }
 
 .cn-prev {
-  left: -28px;
+  left: 0;
 }
 
 .cn-next {
-  right: -28px;
+  right: 0;
 }
 
 /* ========================================
-   DOTS
+   PAGINATION
 ======================================== */
 
-.cn-slider-dots {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  gap: 12px;
-
-  margin-top: 30px;
+.swiper-pagination {
+  bottom: 0 !important;
 }
 
-.cn-dot {
+.swiper-pagination-bullet {
   width: 12px;
   height: 12px;
 
-  border: none;
-
-  border-radius: 999px;
-
   background: var(--CN-border);
 
-  cursor: pointer;
+  opacity: 1;
 
   transition: all 0.3s ease;
 }
 
-.cn-dot:hover {
-  background: var(--CN-secondary);
-}
+.swiper-pagination-bullet-active {
+  width: 36px;
 
-.cn-dot.active {
-  width: 38px;
+  border-radius: 999px;
 
   background: var(--CN-secondary);
 }
 
 /* ========================================
-   RESPONSIVE
+   TABLET
 ======================================== */
 
-@media (max-width: 1024px) {
-  .cn-slider-wrapper {
-    height: 520px;
+@media (max-width: 1199px) {
+  .cn-gallery-card {
+    height: 600px;
   }
 
-  .cn-gallery-header {
-    margin-bottom: 50px;
+  .cn-slider-section {
+    padding-inline: 50px;
   }
 }
+
+/* ========================================
+   MOBILE
+======================================== */
 
 @media (max-width: 768px) {
   .cn-gallery-slider {
@@ -4190,60 +4194,36 @@ body {
   }
 
   .cn-gallery-title {
-    font-size: 2.5rem;
+    font-size: 2.4rem;
   }
 
-  .cn-gallery-text {
-    font-size: 0.98rem;
-  }
-
-  .cn-slider-wrapper {
-    height: 380px;
-    border-radius: 24px;
-  }
-
-  .cn-slide-content {
-    left: 16px;
-    right: 16px;
-    bottom: 16px;
-
-    max-width: unset;
-
-    padding: 18px;
-  }
-
-  .cn-slide-content h3 {
-    font-size: 1.1rem;
+  .cn-gallery-card {
+    height: 500px;
   }
 
   .cn-slider-arrow {
-    width: 46px;
-    height: 46px;
+    display: none;
   }
 
-  .cn-left {
-    left: 12px;
-  }
-
-  .cn-right {
-    right: 12px;
+  .cn-slider-section {
+    padding-inline: 0;
   }
 }
 
+/* ========================================
+   SMALL MOBILE
+======================================== */
+
 @media (max-width: 480px) {
+  .cn-gallery-card {
+    height: 420px;
+  }
+
   .cn-gallery-title {
     font-size: 2rem;
   }
 
-  .cn-gallery-subtitle {
-    font-size: 0.8rem;
-  }
-
   .cn-gallery-btn {
     width: 100%;
-  }
-
-  .cn-slider-wrapper {
-    height: 300px;
   }
 }

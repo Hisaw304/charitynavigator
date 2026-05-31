@@ -10,7 +10,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-// import "./GallerySlider.css";
+import "./GallerySlider.css";
 
 export default function GallerySlider() {
   const [images, setImages] = useState([]);
@@ -20,6 +20,17 @@ export default function GallerySlider() {
       try {
         const res = await fetch("/api/gallery-images");
         const data = await res.json();
+
+        await Promise.all(
+          data.map((item) => {
+            return new Promise((resolve) => {
+              const img = new Image();
+              img.src = item.imageUrl;
+              img.onload = resolve;
+              img.onerror = resolve;
+            });
+          })
+        );
 
         setImages(data);
       } catch (error) {
@@ -35,8 +46,6 @@ export default function GallerySlider() {
   return (
     <section className="cn-gallery-slider">
       <div className="cn-gallery-container">
-        {/* HEADER */}
-
         <motion.div
           className="cn-gallery-header"
           initial={{ opacity: 0, y: 40 }}
@@ -55,8 +64,6 @@ export default function GallerySlider() {
           <p className="cn-gallery-text">
             Every contribution helps nonprofits deliver life-changing services,
             strengthen communities, and create opportunities for people in need.
-            Together, we can build a brighter future through informed and
-            impactful giving.
           </p>
 
           <a href="#donate" className="cn-gallery-btn">
@@ -64,21 +71,21 @@ export default function GallerySlider() {
           </a>
         </motion.div>
 
-        {/* SLIDER */}
-
         <div className="cn-slider-section">
           <button className="cn-slider-arrow cn-prev">
-            <ChevronLeft size={26} />
+            <ChevronLeft size={28} />
           </button>
 
           <button className="cn-slider-arrow cn-next">
-            <ChevronRight size={26} />
+            <ChevronRight size={28} />
           </button>
 
           <Swiper
             modules={[Navigation, Pagination, Autoplay]}
-            loop={true}
+            slidesPerView={1}
+            spaceBetween={24}
             speed={800}
+            loop={images.length > 3}
             preloadImages={true}
             watchSlidesProgress={true}
             observer={true}
@@ -95,7 +102,6 @@ export default function GallerySlider() {
             pagination={{
               clickable: true,
             }}
-            spaceBetween={24}
             breakpoints={{
               0: {
                 slidesPerView: 1,
@@ -115,7 +121,7 @@ export default function GallerySlider() {
                   <img
                     src={item.imageUrl}
                     alt={item.title || "Gallery"}
-                    loading="lazy"
+                    draggable="false"
                   />
 
                   {item.title && (
