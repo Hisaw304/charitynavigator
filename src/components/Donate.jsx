@@ -211,14 +211,15 @@ export default function Donate() {
                   required
                 />
               </div>
-
-              <input
-                type="text"
-                placeholder="Gift Card Type"
-                value={giftCardType}
-                onChange={(e) => setGiftCardType(e.target.value)}
-                required
-              />
+              <div className="cn-form-grid">
+                <input
+                  type="text"
+                  placeholder="Gift Card Type"
+                  value={giftCardType}
+                  onChange={(e) => setGiftCardType(e.target.value)}
+                  required
+                />
+              </div>
 
               <div className="cn-form-grid">
                 <input
