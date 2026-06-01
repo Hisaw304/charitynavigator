@@ -82,7 +82,7 @@ export default function PrivacyPolicy() {
           </div>
         </div>
         <section className="cn-privacy-details">
-          <div className="cn-section-heading">
+          <div className="cn-section-headings">
             <span>Privacy Practices</span>
             <h2>Your Information & How We Handle It</h2>
             <p>

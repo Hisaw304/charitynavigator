@@ -4852,13 +4852,13 @@ body {
   padding: 6rem 0;
 }
 
-.cn-section-heading {
+.cn-section-headings {
   text-align: center;
   max-width: 850px;
   margin: 0 auto 4rem;
 }
 
-.cn-section-heading span {
+.cn-section-headings span {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -4876,7 +4876,7 @@ body {
   margin-bottom: 1rem;
 }
 
-.cn-section-heading h2 {
+.cn-section-headings h2 {
   font-size: clamp(2.2rem, 4vw, 3.5rem);
   line-height: 1.15;
 
@@ -4885,7 +4885,7 @@ body {
   margin-bottom: 1rem;
 }
 
-.cn-section-heading p {
+.cn-section-headings p {
   font-size: 1.05rem;
   line-height: 1.8;
 
