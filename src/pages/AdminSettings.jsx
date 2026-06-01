@@ -87,7 +87,7 @@ const AdminSettings = () => {
   return (
     <div className="cn-admin-page">
       <div className="cn-admin-container">
-        <h2 className="cn-admin-title">Admin Settings</h2>
+        <h2 className="cn-admin-title">Admin</h2>
 
         <button className="cn-logout-btn" onClick={handleLogout}>
           Logout
