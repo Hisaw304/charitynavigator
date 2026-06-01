@@ -3,11 +3,10 @@
 // ========================================
 
 import { motion } from "framer-motion";
-
 import womenImg from "../assets/womens-health.jpg";
 import lgbtImg from "../assets/lgbtq-support.jpg";
 import homelessImg from "../assets/homelessness.jpg";
-
+import { Link } from "react-router-dom";
 const funds = [
   {
     image: womenImg,
@@ -70,8 +69,9 @@ export default function CausewayFunds() {
                 <h3>{fund.title}</h3>
 
                 <p>{fund.description}</p>
-
-                <button className="cn-fund-btn">Explore Fund</button>
+                <Link to="/about">
+                  <button className="cn-fund-btn">Explore Fund</button>
+                </Link>
               </div>
             </motion.div>
           ))}

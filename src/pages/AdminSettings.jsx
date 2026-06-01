@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import AdminGallery from "../components/AdminGallery";
-
+import { useNavigate } from "react-router-dom";
 const AdminSettings = () => {
   const [form, setForm] = useState({
     cryptoAddress: "",
@@ -13,6 +13,12 @@ const AdminSettings = () => {
 
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState("");
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("cnAdminAuth");
+    navigate("/login");
+  };
 
   useEffect(() => {
     fetch("/api/donation-settings")
@@ -82,6 +88,10 @@ const AdminSettings = () => {
     <div className="cn-admin-page">
       <div className="cn-admin-container">
         <h2 className="cn-admin-title">Admin Settings</h2>
+
+        <button className="cn-logout-btn" onClick={handleLogout}>
+          Logout
+        </button>
 
         <form onSubmit={handleSubmit} className="cn-admin-form">
           <div className="cn-form-grid">

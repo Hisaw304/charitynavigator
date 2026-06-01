@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import hawaiiImg from "../assets/hawaii.jpg";
 import immigrantImg from "../assets/immigrant.jpg";
 import gazaImg from "../assets/gaza.jpg";
+import { Link } from "react-router-dom";
 
 const causesData = [
   {
@@ -43,7 +44,9 @@ export default function Causes() {
             <h2 className="cn-causes-title">Discover Charities</h2>
           </div>
 
-          <a className="cn-causes-view-btn">View All</a>
+          <Link to="/about">
+            <button className="cn-causes-view-btn">Learn More</button>
+          </Link>
         </div>
 
         {/* ================= CARDS ================= */}
@@ -73,9 +76,9 @@ export default function Causes() {
 
                 <p className="cn-cause-description">{cause.description}</p>
 
-                <a href="/about" className="cn-cause-btn">
-                  Learn More
-                </a>
+                <Link to="/about">
+                  <button className="cn-cause-btn">Learn More</button>
+                </Link>
               </div>
             </motion.div>
           ))}

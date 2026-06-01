@@ -56,14 +56,13 @@ export default function Footer() {
             <a href="/">Financials and Policies</a>
             <a href="/">Privacy Policy</a>
             <a href="/">Terms of Use</a>
-            <a href="/">FAQs / Contact Us</a>
-            <a href="/">Our Team</a>
+            <a href="/contact">FAQs / Contact Us</a>
+            <a href="/our-team">Our Team</a>
             <a href="/">Careers</a>
             <a href="/">API & CSR Resources</a>
           </div>
         </div>
 
-        {/* ================= BOTTOM ================= */}
         <div className="cn-footer-bottom">
           {/* SOCIALS */}
           <div className="cn-footer-socials">
