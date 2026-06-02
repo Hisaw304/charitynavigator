@@ -33,7 +33,7 @@ export default function Faq() {
 
   return (
     <section className="cn-faq-section">
-      <div className="cn-container">
+      <div className="cn-container-faq">
         <div className="cn-faq-header">
           <h2>Frequently Asked Questions</h2>
           <p>

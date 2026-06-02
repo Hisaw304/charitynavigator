@@ -37,7 +37,7 @@ export default function NonprofitsFaq() {
 
   return (
     <section className="cn-faq-section">
-      <div className="cn-container">
+      <div className="cn-container-faq">
         <div className="cn-faq-header">
           <h2>For Nonprofits</h2>
           <p>

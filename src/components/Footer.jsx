@@ -9,6 +9,7 @@ import {
   FaLinkedinIn,
   FaXTwitter,
 } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 import fourStar from "../assets/four-star.png";
 import bbb from "../assets/ac-s-cmyk-h-reversedwhite-w-url-01.svg";
 import candid from "../assets/candid.png";
@@ -22,7 +23,9 @@ export default function Footer() {
           {/* LEFT */}
           <div className="cn-footer-left">
             <div className="cn-footer-logo">
-              <span>Charity</span> Navigator
+              <Link to="/">
+                <span>Charity</span> Navigator
+              </Link>
             </div>
 
             <div className="cn-footer-address">
@@ -52,14 +55,12 @@ export default function Footer() {
 
           {/* RIGHT */}
           <div className="cn-footer-right">
-            <a href="/">Press Room</a>
-            <a href="/">Financials and Policies</a>
-            <a href="/">Privacy Policy</a>
-            <a href="/">Terms of Use</a>
+            <a href="/">Home</a>
+            <a href="/">About</a>
             <a href="/contact">FAQs / Contact Us</a>
+            <a href="/">Donate</a>
             <a href="/our-team">Our Team</a>
-            <a href="/">Careers</a>
-            <a href="/">API & CSR Resources</a>
+            <a href="/privacy-policy">Privacy Policy</a>
           </div>
         </div>
 
