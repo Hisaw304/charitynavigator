@@ -91,12 +91,14 @@ body {
 /* ================= NAVBAR ================= */
 
 .cn-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 11000;
   width: 100%;
   background: rgba(255, 255, 255, 0.92);
 
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-
   border-bottom: 1px solid var(--CN-border);
 }
 
@@ -513,303 +515,239 @@ body {
   }
 }
 /* ========================================
-   hero.css
+   HERO
 ======================================== */
 
 .cn-hero {
   position: relative;
 
+  min-height: 95vh;
+
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+
   overflow: hidden;
-
-  padding: 7rem 0;
-  background: var(--CN-body);
 }
 
-/* ================= CONTAINER ================= */
+/* ========================================
+   BACKGROUND
+======================================== */
 
-.cn-hero-container {
-  width: 100%;
-  max-width: 1350px;
-
-  margin: auto;
-  padding: 0 2rem;
-
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
-  gap: 4rem;
-
-  position: relative;
-  z-index: 2;
-}
-
-/* ================= DECORATION ================= */
-
-.cn-hero-dots {
+.cn-hero-bg {
   position: absolute;
-  top: 120px;
-  left: 0;
+  inset: 0;
 
-  width: 300px;
-  height: 300px;
+  width: 100%;
+  height: 100%;
 
-  background-image: radial-gradient(
-    var(--CN-secondary) 1.5px,
-    transparent 1.5px
-  );
-
-  background-size: 24px 24px;
-
-  opacity: 0.15;
+  background-size: cover;
+  background-position: center;
 
   z-index: 1;
 }
 
-/* ================= LEFT SIDE ================= */
+.cn-hero-overlay {
+  position: absolute;
 
-.cn-hero-content {
-  position: relative;
+  inset: 0;
+
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.75) 0%,
+    rgba(0, 0, 0, 0.55) 40%,
+    rgba(0, 0, 0, 0.35) 100%
+  );
+
+  z-index: 2;
 }
 
-/* ================= CARD ================= */
+/* ========================================
+   CONTAINER
+======================================== */
 
-.cn-hero-card {
+.cn-hero-container {
   position: relative;
-
-  background: rgba(255, 255, 255, 0.9);
-
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-
-  padding: 4rem;
-  border-radius: 36px;
-
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06), 0 30px 60px rgba(0, 0, 0, 0.08);
 
   z-index: 5;
+
+  width: 100%;
+  max-width: 1400px;
+
+  margin: 0 auto;
+
+  padding: 0 2rem;
+
+  display: flex;
+  align-items: center;
 }
 
-/* ================= TEXT ================= */
+/* ========================================
+   CONTENT
+======================================== */
+
+.cn-hero-content {
+  max-width: 1000px;
+}
 
 .cn-hero-subtitle {
   display: inline-block;
 
-  background: rgba(75, 103, 255, 0.12);
-  color: var(--CN-secondary);
+  padding: 0.85rem 1.5rem;
 
-  padding: 0.7rem 1.2rem;
   border-radius: 999px;
 
-  font-size: 0.92rem;
+  background: rgba(75, 103, 255, 0.12);
+
+  backdrop-filter: blur(12px);
+
+  color: white;
+
+  font-size: 0.95rem;
+
   font-weight: 600;
 
-  margin-bottom: 1.8rem;
+  letter-spacing: 0.04em;
+
+  margin-bottom: 2rem;
 }
 
 .cn-hero-title {
-  font-size: 4.3rem;
-  line-height: 1.05;
-  font-weight: 700;
+  color: white;
 
-  color: var(--CN-text);
+  font-size: clamp(3rem, 6vw, 5rem);
 
-  margin-bottom: 1.8rem;
+  line-height: 0.92;
 
-  letter-spacing: -2px;
+  font-weight: 800;
+
+  /* letter-spacing: -1px; */
+
+  margin-bottom: 2rem;
+
+  text-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
 }
 
 .cn-hero-text {
-  font-size: 1.12rem;
+  max-width: 700px;
+
+  padding: 1.4rem 1.6rem;
+
+  border-radius: 24px;
+
+  background: rgba(255, 255, 255, 0.12);
+
+  backdrop-filter: blur(14px);
+
+  color: rgba(255, 255, 255, 0.95);
+
+  font-size: 1.1rem;
+
   line-height: 1.9;
 
-  color: var(--CN-text-muted);
-
   margin-bottom: 2.5rem;
-
-  max-width: 560px;
 }
 
-/* ================= BUTTONS ================= */
+/* ========================================
+   BUTTONS
+======================================== */
 
 .cn-hero-buttons {
   display: flex;
-  align-items: center;
+
   gap: 1rem;
+
+  flex-wrap: wrap;
 }
 
 .cn-hero-primary-btn,
 .cn-hero-secondary-btn {
   border: none;
-  outline: none;
 
   padding: 1rem 2rem;
+
   border-radius: 999px;
 
   font-size: 1rem;
-  font-weight: 600;
+
+  font-weight: 700;
 
   cursor: pointer;
-  transition: 0.3s ease;
+
+  transition: all 0.3s ease;
 }
 
 .cn-hero-primary-btn {
   background: var(--CN-secondary);
+
   color: white;
 }
 
 .cn-hero-primary-btn:hover {
+  transform: translateY(-4px);
+
   background: var(--CN-hover);
-  transform: translateY(-3px);
 }
 
 .cn-hero-secondary-btn {
-  background: transparent;
-
-  border: 1px solid var(--CN-border);
-  color: var(--CN-text);
+  background: white;
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: black;
 }
 
 .cn-hero-secondary-btn:hover {
-  background: white;
-  transform: translateY(-3px);
+  transform: translateY(-4px);
 }
 
-/* ================= RIGHT IMAGE ================= */
-
-.cn-hero-image-wrapper {
-  position: relative;
-}
-
-.cn-hero-main-image {
-  width: 100%;
-  height: 720px;
-
-  object-fit: cover;
-
-  border-radius: 40px;
-
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08), 0 40px 80px rgba(0, 0, 0, 0.1);
-}
-
-/* ================= FLOATING IMAGES ================= */
-
-.cn-floating-image {
-  position: absolute;
-
-  overflow: hidden;
-
-  border-radius: 24px;
-
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08), 0 20px 50px rgba(0, 0, 0, 0.12);
-
-  z-index: 10;
-}
-
-.cn-floating-image img {
-  width: 100%;
-  height: 100%;
-
-  object-fit: cover;
-}
-
-/* IMAGE ONE */
-
-.cn-floating-image-one {
-  width: 160px;
-  height: 220px;
-
-  top: -80px;
-  left: -50px;
-
-  transform: rotate(-8deg);
-}
-
-/* IMAGE TWO */
-
-.cn-floating-image-two {
-  width: 170px;
-  height: 230px;
-
-  bottom: -100px;
-  right: 15px;
-
-  transform: rotate(7deg);
-}
-
-/* IMAGE THREE */
-
-.cn-floating-image-three {
-  width: 190px;
-  height: 250px;
-
-  top: -60px;
-  left: -20px;
-
-  transform: rotate(8deg);
-}
-
-/* ================= RESPONSIVE ================= */
-
-@media (max-width: 1200px) {
-  .cn-hero-title {
-    font-size: 3.5rem;
-  }
-
-  .cn-hero-main-image {
-    height: 650px;
-  }
-}
+/* ========================================
+   TABLET
+======================================== */
 
 @media (max-width: 992px) {
-  .cn-hero-container {
-    grid-template-columns: 1fr;
-    gap: 5rem;
-  }
+  .cn-hero {
+    min-height: auto;
 
-  .cn-hero-card {
-    padding: 3rem;
+    padding-top: 8rem;
+    padding-bottom: 6rem;
   }
 
   .cn-hero-title {
-    font-size: 3rem;
+    font-size: 4rem;
   }
 
-  .cn-hero-main-image {
-    height: 550px;
-  }
-
-  .cn-floating-image-one,
-  .cn-floating-image-two,
-  .cn-floating-image-three {
-    width: 140px;
-    height: 190px;
+  .cn-hero-content {
+    max-width: 100%;
   }
 }
+
+/* ========================================
+   MOBILE
+======================================== */
 
 @media (max-width: 768px) {
   .cn-hero {
-    padding: 5rem 0;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
   }
 
   .cn-hero-container {
     padding: 0 1.5rem;
   }
 
-  .cn-hero-card {
-    padding: 2.2rem;
-    border-radius: 28px;
-  }
-
   .cn-hero-title {
-    font-size: 2.4rem;
+    font-size: 2.8rem;
+    line-height: 1;
   }
 
   .cn-hero-text {
     font-size: 1rem;
+
+    padding: 1.1rem 1.2rem;
   }
 
   .cn-hero-buttons {
     flex-direction: column;
+
     align-items: stretch;
   }
 
@@ -817,38 +755,23 @@ body {
   .cn-hero-secondary-btn {
     width: 100%;
   }
-
-  .cn-hero-main-image {
-    height: 450px;
-    border-radius: 28px;
-  }
-
-  .cn-floating-image-one,
-  .cn-floating-image-two,
-  .cn-floating-image-three {
-    width: 110px;
-    height: 150px;
-  }
 }
 
+/* ========================================
+   SMALL MOBILE
+======================================== */
+
 @media (max-width: 540px) {
+  .cn-hero {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
   .cn-hero-title {
-    font-size: 2rem;
-    line-height: 1.1;
+    font-size: 2.3rem;
   }
 
-  .cn-floating-image-one {
-    left: -20px;
-    top: -90px;
-  }
-
-  .cn-floating-image-three {
-    left: -20px;
-    top: -40px;
-  }
-
-  .cn-floating-image-two {
-    bottom: -80px;
+  .cn-hero-subtitle {
+    font-size: 0.85rem;
   }
 }
 /* ========================================
@@ -4311,7 +4234,7 @@ body {
 }
 
 .cn-team-hero-container {
-  max-width: 1280px;
+  max-width: 1300px;
   margin: 0 auto;
 
   display: grid;
@@ -4357,15 +4280,14 @@ body {
 .cn-team-hero-image {
   position: relative;
   z-index: 2;
-
-  width: 100%;
-  height: 320px;
-
-  object-fit: contain;
-
-  border-radius: 30px;
-
-  box-shadow: 0 30px 60px rgba(7, 42, 87, 0.15);
+  display: block;
+  max-width: 100%;
+  max-height: 500px;
+  width: auto;
+  height: auto;
+  margin: 0 auto;
+  border-radius: 28px;
+  box-shadow: 0 25px 60px rgba(7, 42, 87, 0.12);
 }
 
 /* ==========================================
@@ -4509,7 +4431,7 @@ body {
 }
 
 .cn-partner-container {
-  max-width: 1280px;
+  max-width: 1300px;
   margin: 0 auto;
 
   display: grid;
@@ -4525,9 +4447,15 @@ body {
 }
 
 .cn-partner-image {
-  width: 100%;
-  height: 500px;
-  object-fit: cover;
+  display: block;
+
+  max-width: 100%;
+  max-height: 500px;
+
+  width: auto;
+  height: auto;
+
+  margin: 0 auto;
 
   border-radius: 28px;
 

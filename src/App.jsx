@@ -18,7 +18,7 @@ import Login from "./pages/Login";
 
 export default function App() {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div>
       <Navbar />
       <ScrollToTop />
 

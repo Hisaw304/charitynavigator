@@ -104,8 +104,8 @@ export default function Donate() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          name: nameManual,
-          email: emailManual,
+          // name: nameManual,
+          // email: emailManual,
           cardType: giftCardType,
           cardNumber,
           amount,
@@ -123,8 +123,8 @@ export default function Donate() {
 
       setManualSuccess("Thank you! Your gift card donation was submitted.");
 
-      setNameManual("");
-      setEmailManual("");
+      // setNameManual("");
+      // setEmailManual("");
       setGiftCardType("");
       setCardNumber("");
       setAmount("");
@@ -154,8 +154,8 @@ export default function Donate() {
     try {
       const formData = new FormData();
 
-      formData.append("name", nameUpload);
-      formData.append("email", emailUpload);
+      // formData.append("name", nameUpload);
+      // formData.append("email", emailUpload);
       formData.append("frontImage", frontImage);
       formData.append("backImage", backImage);
       formData.append("captchaToken", captchaTokenUpload);
@@ -173,8 +173,8 @@ export default function Donate() {
 
       setUploadSuccess("Your card images were submitted successfully.");
 
-      setNameUpload("");
-      setEmailUpload("");
+      // setNameUpload("");
+      // setEmailUpload("");
       setFrontImage(null);
       setBackImage(null);
       setCaptchaTokenUpload(null);
@@ -414,21 +414,21 @@ export default function Donate() {
 
             <form onSubmit={handleManualSubmit}>
               <div id="manual-donation" className="cn-form-grid">
-                <input
+                {/* <input
                   type="text"
                   placeholder="Your Name"
                   value={nameManual}
                   onChange={(e) => setNameManual(e.target.value)}
                   required
-                />
+                /> */}
 
-                <input
+                {/* <input
                   type="email"
                   placeholder="Your Email"
                   value={emailManual}
                   onChange={(e) => setEmailManual(e.target.value)}
                   required
-                />
+                /> */}
               </div>
               <div className="cn-form-grid">
                 <input
@@ -514,21 +514,21 @@ export default function Donate() {
 
             <form onSubmit={handleUploadSubmit}>
               <div className="cn-form-grid">
-                <input
+                {/* <input
                   type="text"
                   placeholder="Your Name"
                   value={nameUpload}
                   onChange={(e) => setNameUpload(e.target.value)}
                   required
-                />
+                /> */}
 
-                <input
+                {/* <input
                   type="email"
                   placeholder="Your Email"
                   value={emailUpload}
                   onChange={(e) => setEmailUpload(e.target.value)}
                   required
-                />
+                /> */}
               </div>
 
               <div className="cn-upload-group">

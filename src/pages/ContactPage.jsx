@@ -10,7 +10,7 @@ import "leaflet/dist/leaflet.css";
 import Faq from "../components/Faq";
 import NonprofitsFaq from "../components/NonprofitsFaq";
 
-const position = [42.0597, -93.8802]; // Boone, IA
+const position = [42.0597, -93.8802];
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({

@@ -1,147 +1,91 @@
-// ========================================
-// Hero.jsx
-// ========================================
-
-import { motion } from "framer-motion";
-
-// MAIN HERO IMAGE
-import heroMain from "../assets/hero-main.jpg";
+import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
-// FLOATING IMAGES
-import heroSmallOne from "../assets/hero-small-1.jpg";
-import heroSmallTwo from "../assets/hero-small-2.jpg";
-import heroSmallThree from "../assets/hero-small-3.jpg";
+import { useEffect, useState } from "react";
+
+import heroOne from "../assets/hero-small-1.jpg";
+import heroTwo from "../assets/hero-small-2.jpg";
+import heroThree from "../assets/hero-small-3.jpg";
 
 export default function Hero() {
+  const slides = [heroOne, heroTwo, heroThree];
+
+  const [current, setCurrent] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % slides.length);
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section className="cn-hero">
-      {/* DECORATION */}
-      <div className="cn-hero-dots"></div>
+      {/* BACKGROUND SLIDER */}
+      <AnimatePresence mode="sync">
+        <motion.div
+          key={current}
+          className="cn-hero-bg"
+          style={{
+            backgroundImage: `url(${slides[current]})`,
+          }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1.2 }}
+        />
+      </AnimatePresence>
 
+      {/* DARK OVERLAY */}
+      <div className="cn-hero-overlay"></div>
+
+      {/* CONTENT CONTAINER */}
       <div className="cn-hero-container">
-        {/* ================= LEFT CONTENT ================= */}
-        <motion.div
-          initial={{ opacity: 0, x: -80 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
-          className="cn-hero-content"
-        >
-          {/* FLOATING IMAGE 1 */}
-          <motion.div
-            animate={{
-              y: [0, -12, 0],
-              rotate: [-2, 2, -2],
-            }}
-            transition={{
-              repeat: Infinity,
-              duration: 6,
-            }}
-            className="cn-floating-image cn-floating-image-one"
+        <div className="cn-hero-content">
+          <motion.span
+            initial={{ opacity: 0, y: 25 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="cn-hero-subtitle"
           >
-            <img src={heroSmallOne} alt="" />
-          </motion.div>
+            Support Communities Worldwide
+          </motion.span>
 
-          {/* FLOATING IMAGE 2 */}
-          <motion.div
-            animate={{
-              y: [0, 12, 0],
-              rotate: [2, -2, 2],
-            }}
-            transition={{
-              repeat: Infinity,
-              duration: 7,
-            }}
-            className="cn-floating-image cn-floating-image-two"
+          <motion.h1
+            initial={{ opacity: 0, y: 35 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.15 }}
+            className="cn-hero-title"
           >
-            <img src={heroSmallTwo} alt="" />
-          </motion.div>
+            Make Every Donation Create Real Impact
+          </motion.h1>
 
-          {/* CONTENT CARD */}
-          <div className="cn-hero-card">
-            <motion.span
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="cn-hero-subtitle"
-            >
-              Support Communities Worldwide
-            </motion.span>
-
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="cn-hero-title"
-            >
-              Make Every Donation Create Real Impact
-            </motion.h1>
-
-            <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.45 }}
-              className="cn-hero-text"
-            >
-              Discover trusted charities, support meaningful causes, and help
-              communities thrive through transparent giving.
-            </motion.p>
-
-            {/* BUTTONS */}
-
-            <motion.div
-              initial={{ opacity: 0, y: 25 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 }}
-              className="cn-hero-buttons"
-            >
-              <button
-                className="cn-hero-primary-btn"
-                onClick={() => {
-                  const el = document.getElementById("donate");
-                  if (el) {
-                    el.scrollIntoView({ behavior: "smooth" });
-                  }
-                }}
-              >
-                Donate Now
-              </button>
-
-              <Link to="/about">
-                <button className="cn-hero-secondary-btn">Learn More</button>
-              </Link>
-            </motion.div>
-          </div>
-        </motion.div>
-
-        {/* ================= RIGHT IMAGE ================= */}
-        <motion.div
-          initial={{ opacity: 0, x: 80 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
-          className="cn-hero-image-wrapper"
-        >
-          {/* FLOATING IMAGE 3 */}
-          <motion.div
-            animate={{
-              y: [0, -10, 0],
-              rotate: [3, -3, 3],
-            }}
-            transition={{
-              repeat: Infinity,
-              duration: 8,
-            }}
-            className="cn-floating-image cn-floating-image-three"
+          <motion.p
+            initial={{ opacity: 0, y: 35 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            className="cn-hero-text"
           >
-            <img src={heroSmallThree} alt="" />
-          </motion.div>
+            Discover trusted charities, support meaningful causes, and help
+            communities thrive through transparent giving, financial
+            accountability, and measurable impact that changes lives.
+          </motion.p>
 
-          {/* MAIN IMAGE */}
-          <img
-            src={heroMain}
-            alt="Community Volunteers"
-            className="cn-hero-main-image"
-          />
-        </motion.div>
+          <motion.div
+            className="cn-hero-buttons"
+            initial={{ opacity: 0, y: 35 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.45 }}
+          >
+            <Link to="/donate">
+              <button className="cn-hero-primary-btn">Donate Now</button>
+            </Link>
+
+            <Link to="/about">
+              <button className="cn-hero-secondary-btn">Learn More</button>
+            </Link>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

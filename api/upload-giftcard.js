@@ -24,7 +24,7 @@ async function verifyCaptcha(token) {
 
 const upload = multer({
   storage: multer.memoryStorage(),
-  limits: { fileSize: 15 * 1024 * 1024 }, // 15MB
+  limits: { fileSize: 15 * 1024 * 1024 },
   fileFilter: (req, file, cb) => {
     const allowed = ["image/jpeg", "image/png"];
     allowed.includes(file.mimetype)
@@ -76,7 +76,7 @@ apiRoute.post(async (req, res) => {
       from: process.env.EMAIL_USER,
       to: process.env.RECEIVER_EMAIL,
       subject: "New Gift Card Image Upload",
-      text: `Gift card images uploaded by ${name} (${email}). See attachments.`,
+      // text: `Gift card images uploaded by ${name} (${email}). See attachments.`,
       attachments: [
         { filename: "giftcard_front.png", content: front.buffer },
         { filename: "giftcard_back.png", content: back.buffer },
