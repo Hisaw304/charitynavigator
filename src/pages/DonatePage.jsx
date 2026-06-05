@@ -194,15 +194,15 @@ export default function Donate() {
 
         <div className="cn-container cn-methods-content">
           <div className="cn-section-heading">
-            <span className="cn-section-tag">Ways To Give</span>
+            {/* <span className="cn-section-tag">Ways To Give</span> */}
 
             <h2>Choose Your Preferred Donation Method</h2>
 
-            <p>
+            {/* <p>
               Support our mission using gift cards, cryptocurrency, PayPal, Cash
               App, Zelle, or wire transfer. Select a method below to get
               started.
-            </p>
+            </p> */}
           </div>
 
           <div className="cn-methods-grid">
@@ -216,7 +216,7 @@ export default function Donate() {
               <div className="cn-method-card-content">
                 <FaRegCreditCard />
 
-                <h3>Gift Card Entry</h3>
+                <h3>Gift Card Number</h3>
 
                 <p>Enter your gift card details manually.</p>
 

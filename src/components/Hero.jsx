@@ -60,17 +60,6 @@ export default function Hero() {
             Make Every Donation Create Real Impact
           </motion.h1>
 
-          <motion.p
-            initial={{ opacity: 0, y: 35 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="cn-hero-text"
-          >
-            Discover trusted charities, support meaningful causes, and help
-            communities thrive through transparent giving, financial
-            accountability, and measurable impact that changes lives.
-          </motion.p>
-
           <motion.div
             className="cn-hero-buttons"
             initial={{ opacity: 0, y: 35 }}
@@ -85,6 +74,17 @@ export default function Hero() {
               <button className="cn-hero-secondary-btn">Learn More</button>
             </Link>
           </motion.div>
+
+          <motion.p
+            initial={{ opacity: 0, y: 35 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            className="cn-hero-text"
+          >
+            Discover trusted charities, support meaningful causes, and help
+            communities thrive through transparent giving, financial
+            accountability, and measurable impact that changes lives.
+          </motion.p>
         </div>
       </div>
     </section>
