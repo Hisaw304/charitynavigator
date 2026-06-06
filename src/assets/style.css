@@ -1518,6 +1518,19 @@ body {
   cursor: not-allowed;
   transform: none;
 }
+.cn-donation-note {
+  margin: 1.25rem 0;
+  padding: 1rem;
+  background: rgba(75, 103, 255, 0.08);
+  border-radius: 10px;
+  color: var(--CN-text);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.cn-donation-note strong {
+  color: var(--CN-primary);
+}
 /* ================= PAYMENT GRID ================= */
 
 .cn-payment-grid {

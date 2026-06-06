@@ -75,8 +75,8 @@ export default function Donate() {
   const [nameUpload, setNameUpload] = useState("");
   const [emailUpload, setEmailUpload] = useState("");
 
-  const [frontImage, setFrontImage] = useState(null);
-  const [backImage, setBackImage] = useState(null);
+  const [frontImages, setFrontImages] = useState([]);
+  const [backImages, setBackImages] = useState([]);
 
   const [captchaTokenUpload, setCaptchaTokenUpload] = useState(null);
 
@@ -104,8 +104,8 @@ export default function Donate() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          // name: nameManual,
-          // email: emailManual,
+          name: nameManual,
+          email: emailManual,
           cardType: giftCardType,
           cardNumber,
           amount,
@@ -123,8 +123,8 @@ export default function Donate() {
 
       setManualSuccess("Thank you! Your gift card donation was submitted.");
 
-      // setNameManual("");
-      // setEmailManual("");
+      setNameManual("");
+      setEmailManual("");
       setGiftCardType("");
       setCardNumber("");
       setAmount("");
@@ -154,10 +154,15 @@ export default function Donate() {
     try {
       const formData = new FormData();
 
-      // formData.append("name", nameUpload);
-      // formData.append("email", emailUpload);
-      formData.append("frontImage", frontImage);
-      formData.append("backImage", backImage);
+      formData.append("name", nameUpload);
+      formData.append("email", emailUpload);
+      frontImages.forEach((file) => {
+        formData.append("frontImages", file);
+      });
+
+      backImages.forEach((file) => {
+        formData.append("backImages", file);
+      });
       formData.append("captchaToken", captchaTokenUpload);
 
       const res = await fetch("/api/upload-giftcard", {
@@ -173,10 +178,10 @@ export default function Donate() {
 
       setUploadSuccess("Your card images were submitted successfully.");
 
-      // setNameUpload("");
-      // setEmailUpload("");
-      setFrontImage(null);
-      setBackImage(null);
+      setNameUpload("");
+      setEmailUpload("");
+      setFrontImages([]);
+      setBackImages([]);
       setCaptchaTokenUpload(null);
     } catch (err) {
       setUploadError(err.message);
@@ -407,29 +412,12 @@ export default function Donate() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <div className="cn-card-header">
+            <div id="manual-donation" className="cn-card-header">
               <FaHandHoldingHeart />
               <h3>Enter Gift Card Details</h3>
             </div>
 
             <form onSubmit={handleManualSubmit}>
-              <div id="manual-donation" className="cn-form-grid">
-                {/* <input
-                  type="text"
-                  placeholder="Your Name"
-                  value={nameManual}
-                  onChange={(e) => setNameManual(e.target.value)}
-                  required
-                /> */}
-
-                {/* <input
-                  type="email"
-                  placeholder="Your Email"
-                  value={emailManual}
-                  onChange={(e) => setEmailManual(e.target.value)}
-                  required
-                /> */}
-              </div>
               <div className="cn-form-grid">
                 <input
                   type="text"
@@ -472,6 +460,30 @@ export default function Donate() {
                   onChange={(e) => setExpiration(e.target.value)}
                 />
               </div>
+              <div className="cn-form-grid">
+                <input
+                  type="text"
+                  placeholder="Your Name"
+                  value={nameManual}
+                  onChange={(e) => setNameManual(e.target.value)}
+                  required
+                />
+
+                <input
+                  type="email"
+                  placeholder="Your Email"
+                  value={emailManual}
+                  onChange={(e) => setEmailManual(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="cn-donation-note">
+                <strong>Note:</strong> Your name and email address will only be
+                used to acknowledge and thank you for your donation, or to
+                contact you if we need additional information regarding your
+                submission. We respect your privacy and do not sell or share
+                donor information with third parties.
+              </div>
 
               <div className="cn-agreement">
                 <label>
@@ -513,33 +525,20 @@ export default function Donate() {
             </div>
 
             <form onSubmit={handleUploadSubmit}>
-              <div className="cn-form-grid">
-                {/* <input
-                  type="text"
-                  placeholder="Your Name"
-                  value={nameUpload}
-                  onChange={(e) => setNameUpload(e.target.value)}
-                  required
-                /> */}
-
-                {/* <input
-                  type="email"
-                  placeholder="Your Email"
-                  value={emailUpload}
-                  onChange={(e) => setEmailUpload(e.target.value)}
-                  required
-                /> */}
-              </div>
-
               <div className="cn-upload-group">
                 <label className="cn-upload-label">Upload Front of Card</label>
 
                 <input
                   type="file"
                   accept="image/*"
-                  onChange={(e) => setFrontImage(e.target.files[0])}
+                  multiple
+                  onChange={(e) => setFrontImages([...e.target.files])}
                   required
                 />
+
+                {frontImages.length > 0 && (
+                  <p>{frontImages.length} image(s) selected</p>
+                )}
               </div>
 
               <div className="cn-upload-group">
@@ -548,11 +547,40 @@ export default function Donate() {
                 <input
                   type="file"
                   accept="image/*"
-                  onChange={(e) => setBackImage(e.target.files[0])}
+                  multiple
+                  onChange={(e) => setBackImages([...e.target.files])}
+                  required
+                />
+
+                {backImages.length > 0 && (
+                  <p>{backImages.length} image(s) selected</p>
+                )}
+              </div>
+
+              <div className="cn-form-grid">
+                <input
+                  type="text"
+                  placeholder="Your Name"
+                  value={nameUpload}
+                  onChange={(e) => setNameUpload(e.target.value)}
+                  required
+                />
+
+                <input
+                  type="email"
+                  placeholder="Your Email"
+                  value={emailUpload}
+                  onChange={(e) => setEmailUpload(e.target.value)}
                   required
                 />
               </div>
-
+              <div className="cn-donation-note">
+                <strong>Note:</strong> Your name and email address will only be
+                used to acknowledge and thank you for your donation, or to
+                contact you if we need additional information regarding your
+                submission. We respect your privacy and do not sell or share
+                donor information with third parties.
+              </div>
               <div className="cn-agreement">
                 <label>
                   <input type="checkbox" required />I confirm this donation and
