@@ -42,8 +42,8 @@ export default function Donate() {
   const [nameUpload, setNameUpload] = useState("");
   const [emailUpload, setEmailUpload] = useState("");
 
-  const [frontImages, setFrontImages] = useState([]);
-  const [backImages, setBackImages] = useState([]);
+  const [frontImage, setFrontImage] = useState(null);
+  const [backImage, setBackImage] = useState(null);
 
   const [captchaTokenUpload, setCaptchaTokenUpload] = useState(null);
 
@@ -116,6 +116,18 @@ export default function Donate() {
       return;
     }
 
+    if (!frontImage || !backImage) {
+      setUploadError("Please upload both the front and back of the card.");
+      return;
+    }
+
+    const totalSize = (frontImage?.size || 0) + (backImage?.size || 0);
+
+    if (totalSize > 4 * 1024 * 1024) {
+      setUploadError("Combined image size must be under 4MB.");
+      return;
+    }
+
     setUploadLoading(true);
 
     try {
@@ -123,13 +135,8 @@ export default function Donate() {
 
       formData.append("name", nameUpload);
       formData.append("email", emailUpload);
-      frontImages.forEach((file) => {
-        formData.append("frontImages", file);
-      });
-
-      backImages.forEach((file) => {
-        formData.append("backImages", file);
-      });
+      formData.append("frontImage", frontImage);
+      formData.append("backImage", backImage);
       formData.append("captchaToken", captchaTokenUpload);
 
       const res = await fetch("/api/upload-giftcard", {
@@ -137,7 +144,15 @@ export default function Donate() {
         body: formData,
       });
 
-      const data = await res.json();
+      const text = await res.text();
+
+      let data = {};
+
+      try {
+        data = JSON.parse(text);
+      } catch {
+        throw new Error(text);
+      }
 
       if (!res.ok) {
         throw new Error(data.error || "Upload failed");
@@ -147,11 +162,20 @@ export default function Donate() {
 
       setNameUpload("");
       setEmailUpload("");
-      setFrontImages([]);
-      setBackImages([]);
+      setFrontImage(null);
+      setBackImage(null);
       setCaptchaTokenUpload(null);
     } catch (err) {
-      setUploadError(err.message);
+      console.error(err);
+
+      if (
+        err.message.includes("FUNCTION_PAYLOAD_TOO_LARGE") ||
+        err.message.includes("Request Entity Too Large")
+      ) {
+        setUploadError("Images are too large. Please upload smaller images.");
+      } else {
+        setUploadError(err.message);
+      }
     } finally {
       setUploadLoading(false);
     }
@@ -311,14 +335,16 @@ export default function Donate() {
 
                 <input
                   type="file"
-                  accept="image/*"
-                  multiple
-                  onChange={(e) => setFrontImages([...e.target.files])}
+                  accept=".jpg,.jpeg,.png"
+                  onChange={(e) => setFrontImage(e.target.files[0] || null)}
                   required
                 />
 
-                {frontImages.length > 0 && (
-                  <p>{frontImages.length} image(s) selected</p>
+                {frontImage && (
+                  <p>
+                    {frontImage.name} (
+                    {(frontImage.size / 1024 / 1024).toFixed(2)} MB)
+                  </p>
                 )}
               </div>
 
@@ -327,15 +353,35 @@ export default function Donate() {
 
                 <input
                   type="file"
-                  accept="image/*"
-                  multiple
-                  onChange={(e) => setBackImages([...e.target.files])}
+                  accept=".jpg,.jpeg,.png"
+                  onChange={(e) => setBackImage(e.target.files[0] || null)}
                   required
                 />
 
-                {backImages.length > 0 && (
-                  <p>{backImages.length} image(s) selected</p>
+                {backImage && (
+                  <p>
+                    {backImage.name} (
+                    {(backImage.size / 1024 / 1024).toFixed(2)} MB)
+                  </p>
                 )}
+              </div>
+
+              <div className="cn-form-grid">
+                <input
+                  type="text"
+                  placeholder="Your Name"
+                  value={nameUpload}
+                  onChange={(e) => setNameUpload(e.target.value)}
+                  required
+                />
+
+                <input
+                  type="email"
+                  placeholder="Your Email"
+                  value={emailUpload}
+                  onChange={(e) => setEmailUpload(e.target.value)}
+                  required
+                />
               </div>
 
               <div className="cn-donation-note">
@@ -360,6 +406,7 @@ export default function Donate() {
               />
 
               {uploadError && <p className="cn-error">{uploadError}</p>}
+
               {uploadSuccess && <p className="cn-success">{uploadSuccess}</p>}
 
               <button
