@@ -43,14 +43,8 @@ const upload = multer({
     }
   },
 }).fields([
-  {
-    name: "frontImages",
-    maxCount: 20,
-  },
-  {
-    name: "backImages",
-    maxCount: 20,
-  },
+  { name: "frontImages", maxCount: 5 },
+  { name: "backImages", maxCount: 5 },
 ]);
 
 const apiRoute = nextConnect({
@@ -95,7 +89,7 @@ apiRoute.post(async (req, res) => {
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
       port: Number(process.env.SMTP_PORT),
-      secure: false,
+      secure: true,
 
       auth: {
         user: process.env.EMAIL_USER,
