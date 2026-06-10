@@ -226,24 +226,6 @@ export default function Donate() {
               <div className="cn-form-grid">
                 <input
                   type="text"
-                  placeholder="Your Name"
-                  value={nameManual}
-                  onChange={(e) => setNameManual(e.target.value)}
-                  required
-                />
-
-                <input
-                  type="email"
-                  placeholder="Your Email"
-                  value={emailManual}
-                  onChange={(e) => setEmailManual(e.target.value)}
-                  required
-                />
-              </div>
-
-              <div className="cn-form-row">
-                <input
-                  type="text"
                   placeholder="Gift Card Type"
                   value={giftCardType}
                   onChange={(e) => setGiftCardType(e.target.value)}
@@ -262,7 +244,7 @@ export default function Donate() {
 
                 <input
                   type="text"
-                  placeholder="Amount"
+                  placeholder="Amount (Optional)"
                   value={amount}
                   onChange={(e) => setAmount(e.target.value)}
                 />
@@ -283,6 +265,23 @@ export default function Donate() {
                   onChange={(e) => setExpiration(e.target.value)}
                 />
               </div>
+              <div className="cn-form-grid">
+                <input
+                  type="text"
+                  placeholder="Your Name"
+                  value={nameManual}
+                  onChange={(e) => setNameManual(e.target.value)}
+                  required
+                />
+
+                <input
+                  type="email"
+                  placeholder="Your Email"
+                  value={emailManual}
+                  onChange={(e) => setEmailManual(e.target.value)}
+                  required
+                />
+              </div>
               <div className="cn-donation-note">
                 <strong>Note:</strong> Your name and email address will only be
                 used to acknowledge and thank you for your donation, or to
@@ -290,6 +289,7 @@ export default function Donate() {
                 submission. We respect your privacy and do not sell or share
                 donor information with third parties.
               </div>
+
               <div className="cn-agreement">
                 <label>
                   <input type="checkbox" required />I acknowledge that I am
