@@ -3956,7 +3956,6 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-
   padding: 10px 20px;
 
   border-radius: 999px;
@@ -3974,9 +3973,7 @@ body {
   font-size: clamp(2.5rem, 5vw, 4.5rem);
   font-weight: 700;
   line-height: 1.1;
-
   color: var(--CN-primary);
-
   margin-bottom: 20px;
 }
 

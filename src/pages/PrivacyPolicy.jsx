@@ -56,7 +56,7 @@ export default function PrivacyPolicy() {
           </p>
 
           <div className="cn-privacy-contact">
-            <strong>info@charitynavigator.org</strong>
+            <strong>info@navigatorcharity.us</strong>
           </div>
         </div>
 
@@ -349,7 +349,7 @@ export default function PrivacyPolicy() {
                   <p>
                     If you have questions about this Privacy Policy, your
                     personal information, or our privacy practices, please
-                    contact us at info@charitynavigator.org and our team will be
+                    contact us at info@navigatorcharity.us and our team will be
                     happy to assist.
                   </p>
                 </div>
