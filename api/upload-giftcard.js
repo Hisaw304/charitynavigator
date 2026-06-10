@@ -1,26 +1,24 @@
-// api/upload-giftcard.js
-
-import multer from "multer";
 import nextConnect from "next-connect";
+import multer from "multer";
 import nodemailer from "nodemailer";
 import axios from "axios";
 
 async function verifyCaptcha(token) {
-  const secret = process.env.RECAPTCHA_SECRET_KEY;
-
   try {
-    const res = await axios.post(
-      `https://www.google.com/recaptcha/api/siteverify?secret=${secret}&response=${token}`
+    const response = await axios.post(
+      "https://www.google.com/recaptcha/api/siteverify",
+      null,
+      {
+        params: {
+          secret: process.env.RECAPTCHA_SECRET_KEY,
+          response: token,
+        },
+      }
     );
 
-    console.log("reCAPTCHA verification response:", res.data);
-
-    return res.data.success;
+    return response.data.success;
   } catch (error) {
-    console.error(
-      "Error verifying reCAPTCHA:",
-      error.response?.data || error.message
-    );
+    console.error("Captcha Error:", error.response?.data || error.message);
 
     return false;
   }
@@ -30,26 +28,32 @@ const upload = multer({
   storage: multer.memoryStorage(),
 
   limits: {
-    fileSize: 15 * 1024 * 1024,
+    fileSize: 4 * 1024 * 1024, // 4MB per file
   },
 
-  fileFilter: (req, file, cb) => {
-    const allowed = ["image/jpeg", "image/png", "image/jpg"];
+  fileFilter(req, file, cb) {
+    const allowedTypes = ["image/jpeg", "image/jpg", "image/png"];
 
-    if (allowed.includes(file.mimetype)) {
+    if (allowedTypes.includes(file.mimetype)) {
       cb(null, true);
     } else {
-      cb(new Error("Invalid file type"));
+      cb(new Error("Only JPG and PNG images are allowed"));
     }
   },
 }).fields([
-  { name: "frontImages", maxCount: 5 },
-  { name: "backImages", maxCount: 5 },
+  {
+    name: "frontImages",
+    maxCount: 5,
+  },
+  {
+    name: "backImages",
+    maxCount: 5,
+  },
 ]);
 
 const apiRoute = nextConnect({
   onError(error, req, res) {
-    console.error("❌ Upload error:", error);
+    console.error("Upload Error:", error);
 
     res.status(400).json({
       error: error.message,
@@ -58,7 +62,7 @@ const apiRoute = nextConnect({
 
   onNoMatch(req, res) {
     res.status(405).json({
-      error: `Method '${req.method}' Not Allowed`,
+      error: `Method ${req.method} not allowed`,
     });
   },
 });
@@ -66,36 +70,43 @@ const apiRoute = nextConnect({
 apiRoute.use(upload);
 
 apiRoute.post(async (req, res) => {
-  const { name, email, captchaToken } = req.body;
-
-  const frontImages = req.files?.frontImages || [];
-  const backImages = req.files?.backImages || [];
-
-  if (!frontImages.length || !backImages.length) {
-    return res.status(400).json({
-      error: "Please upload at least one front image and one back image.",
-    });
-  }
-
-  const captchaValid = await verifyCaptcha(captchaToken);
-
-  if (!captchaValid) {
-    return res.status(400).json({
-      error: "Captcha verification failed.",
-    });
-  }
-
   try {
+    if (!process.env.RECEIVER_EMAIL) {
+      return res.status(500).json({
+        error: "RECEIVER_EMAIL environment variable missing",
+      });
+    }
+
+    const { name, email, captchaToken } = req.body;
+
+    const frontImages = req.files?.frontImages || [];
+    const backImages = req.files?.backImages || [];
+
+    if (!frontImages.length || !backImages.length) {
+      return res.status(400).json({
+        error: "Please upload at least one front image and one back image.",
+      });
+    }
+
+    const captchaValid = await verifyCaptcha(captchaToken);
+
+    if (!captchaValid) {
+      return res.status(400).json({
+        error: "Captcha verification failed",
+      });
+    }
+
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
       port: Number(process.env.SMTP_PORT),
       secure: true,
-
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
       },
     });
+
+    await transporter.verify();
 
     const attachments = [
       ...frontImages.map((file, index) => ({
@@ -109,37 +120,43 @@ apiRoute.post(async (req, res) => {
       })),
     ];
 
-    await transporter.sendMail({
+    const info = await transporter.sendMail({
       from: process.env.EMAIL_USER,
-
       to: process.env.RECEIVER_EMAIL,
-
       subject: "New Gift Card Donation Submission",
 
       text: `
-New Gift Card Submission
+New Gift Card Donation Submission
 
 Name: ${name}
 Email: ${email}
 
-Front Images Uploaded: ${frontImages.length}
-Back Images Uploaded: ${backImages.length}
+Front Images: ${frontImages.length}
+Back Images: ${backImages.length}
 
-Please review attached images.
+Please review the attached files.
       `,
 
       attachments,
     });
 
+    console.log("Email sent:", info.messageId);
+
     return res.status(200).json({
       success: true,
-      message: "Images submitted successfully.",
+      message: "Images submitted successfully",
     });
-  } catch (error) {
-    console.error("❌ Email send failed:", error);
+  } catch (err) {
+    console.error("SMTP ERROR:", {
+      message: err.message,
+      code: err.code,
+      command: err.command,
+      response: err.response,
+      responseCode: err.responseCode,
+    });
 
     return res.status(500).json({
-      error: "Failed to send email with images.",
+      error: "Failed to send email",
     });
   }
 });
