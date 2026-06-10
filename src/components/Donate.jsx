@@ -223,7 +223,7 @@ export default function Donate() {
             </div>
 
             <form onSubmit={handleManualSubmit}>
-              <div className="cn-form-grid">
+              <div className="cn-form-type">
                 <input
                   type="text"
                   placeholder="Gift Card Type"

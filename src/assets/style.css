@@ -1364,7 +1364,9 @@ body {
   gap: 1.25rem;
   margin-bottom: 1.25rem;
 }
-
+.cn-form-type {
+  margin-bottom: 1.25rem;
+}
 .cn-form-row {
   margin-bottom: 1.25rem;
 }
