@@ -26,27 +26,25 @@ async function verifyCaptcha(token) {
 
 const upload = multer({
   storage: multer.memoryStorage(),
-
   limits: {
-    fileSize: 4 * 1024 * 1024, // 4MB per image
+    fileSize: 4 * 1024 * 1024,
   },
-
   fileFilter(req, file, cb) {
     const allowedTypes = ["image/jpeg", "image/jpg", "image/png"];
 
     if (allowedTypes.includes(file.mimetype)) {
       cb(null, true);
     } else {
-      cb(new Error("Only JPG, JPEG and PNG images are allowed."));
+      cb(new Error("Only JPG and PNG images are allowed"));
     }
   },
 }).fields([
   {
-    name: "frontImages",
+    name: "frontImage",
     maxCount: 1,
   },
   {
-    name: "backImages",
+    name: "backImage",
     maxCount: 1,
   },
 ]);
@@ -81,9 +79,9 @@ apiRoute.post(async (req, res) => {
 
     const { name, email, captchaToken } = req.body;
 
-    const frontImage = req.files?.frontImages?.[0] || null;
+    const frontImage = req.files?.frontImage?.[0] || null;
 
-    const backImage = req.files?.backImages?.[0] || null;
+    const backImage = req.files?.backImage?.[0] || null;
 
     console.log("Name:", name);
     console.log("Email:", email);
