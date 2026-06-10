@@ -15,9 +15,7 @@ async function verifyCaptcha(token) {
     );
 
     return response.data.success;
-  } catch (error) {
-    console.error("Captcha Error:", error.response?.data || error.message);
-
+  } catch {
     return false;
   }
 }
@@ -81,28 +79,18 @@ PIN: ${pin}
 Expiration: ${expiration}
 `;
 
-    const info = await transporter.sendMail({
+    await transporter.sendMail({
       from: process.env.EMAIL_USER,
       to: process.env.RECEIVER_EMAIL,
       subject: "New Manual Gift Card Donation",
       text: message,
     });
 
-    console.log("Email sent:", info.messageId);
-
     return res.status(200).json({
       success: true,
       message: "Donation submitted successfully",
     });
-  } catch (err) {
-    console.error("SMTP ERROR:", {
-      message: err.message,
-      code: err.code,
-      command: err.command,
-      response: err.response,
-      responseCode: err.responseCode,
-    });
-
+  } catch {
     return res.status(500).json({
       error: "Failed to send donation email",
     });
