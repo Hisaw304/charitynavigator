@@ -26,8 +26,8 @@ export default async function handler(req, res) {
   }
 
   const {
-    // name,
-    // email,
+    name,
+    email,
     cardType,
     cardNumber,
     amount,
@@ -43,8 +43,8 @@ export default async function handler(req, res) {
   const message = `
   Manual Gift Card Donation
   ---------------------------
-  // Name: ${name}
-  // Email: ${email}
+  Name: ${name}
+  Email: ${email}
   Card Type: ${cardType}
   Card Number: ${cardNumber}
   Amount: ${amount}
@@ -54,8 +54,8 @@ export default async function handler(req, res) {
 
   try {
     const transporter = nodemailer.createTransport({
-      host: "smtp.gmail.com",
-      port: 587,
+      host: process.env.SMTP_HOST,
+      port: Number(process.env.SMTP_PORT),
       secure: false,
       auth: {
         user: process.env.EMAIL_USER,

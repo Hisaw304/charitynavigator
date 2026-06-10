@@ -93,8 +93,8 @@ apiRoute.post(async (req, res) => {
 
   try {
     const transporter = nodemailer.createTransport({
-      host: "smtp.gmail.com",
-      port: 587,
+      host: process.env.SMTP_HOST,
+      port: Number(process.env.SMTP_PORT),
       secure: false,
 
       auth: {
