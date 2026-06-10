@@ -19,7 +19,7 @@
     "mongoose": "^9.6.3",
     "multer": "^2.1.1",
     "multer-storage-cloudinary": "^4.0.0",
-    "next-connect": "^1.0.0",
+    "next-connect": "^0.12.2",
     "nodemailer": "^8.0.10",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
